@@ -1,5 +1,7 @@
 # sampai-site
 
+**Live site:** https://haziqlucii.github.io/sampai-site/ (Malay: [/ms/](https://haziqlucii.github.io/sampai-site/ms/), Indonesian: [/id/](https://haziqlucii.github.io/sampai-site/id/))
+
 The website for **Sampai**, a nag-until-done reminder app for Android: a reminder that rings again every 1, 5, 10, 15, 30 or 60 minutes until you tap Done.
 
 - `/` landing page (English), `/ms/` Malay, `/id/` Indonesian
