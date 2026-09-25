@@ -10,7 +10,7 @@ for(let i=-D;i<D;i+=cell)for(let j=-D;j<D;j+=cell){const px=W/2+i*co-j*si,py=H/2
 let lenis=null,raf=null;
 function setup(){
     const g=window.gsap,ST=window.ScrollTrigger,root=document.querySelector('[data-root]');if(!g||!ST||!root)return;
-    g.registerPlugin(ST);const q=g.utils.selector(root);
+    g.registerPlugin(ST);ST.config({ignoreMobileResize:true});const wide=window.matchMedia('(min-width: 721px)').matches;const q=g.utils.selector(root);
     const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     g.context(()=>{
       const label=q('[data-label]')[0];
@@ -25,8 +25,8 @@ function setup(){
       g.from(q('[data-hphone]'),{y:90,opacity:0,duration:1.2,ease:'power3.out',delay:.3});
       g.from(q('[data-hwm]'),{opacity:0,duration:2,ease:'power1.out',delay:.6});
       const hero=q('[data-hero]')[0];
-      g.to(q('[data-hword]'),{yPercent:-28,ease:'none',scrollTrigger:{trigger:hero,start:'top top',end:'bottom top',scrub:true}});
-      g.to(q('[data-hpar]'),{y:-140,ease:'none',scrollTrigger:{trigger:hero,start:'top top',end:'bottom top',scrub:true}});
+      if(wide){g.to(q('[data-hword]'),{yPercent:-28,ease:'none',scrollTrigger:{trigger:hero,start:'top top',end:'bottom top',scrub:true}});g.to(q('[data-hpar]'),{y:-140,ease:'none',scrollTrigger:{trigger:hero,start:'top top',end:'bottom top',scrub:true}});}
+      
       g.to(q('[data-hwm]'),{yPercent:-20,xPercent:-6,ease:'none',scrollTrigger:{trigger:hero,start:'top top',end:'bottom top',scrub:true}});
       g.from(q('[data-fact]'),{y:20,opacity:0,duration:.7,ease:'power3.out',stagger:.08,scrollTrigger:{trigger:q('[data-fact]')[0],start:'top 92%'}});
       // generic reveals
@@ -45,9 +45,9 @@ function setup(){
       const cd=q('[data-cd]')[0],o={v:10};
       g.timeline({scrollTrigger:{trigger:cd,start:'top 80%',end:'top 25%',scrub:.4}}).to(o,{v:0,ease:'none',duration:1,onUpdate:()=>{cd.textContent=String(Math.ceil(o.v))}}).to(q('[data-cdres]'),{opacity:1,duration:.15});
       // horizontal gallery
-      const gal=q('[data-gal]')[0],track=q('[data-track]')[0];
+      if(wide){const gal=q('[data-gal]')[0],track=q('[data-track]')[0];
       const dist=()=>Math.max(0,track.scrollWidth-gal.clientWidth);
-      g.to(track,{x:()=>-dist(),ease:'none',scrollTrigger:{trigger:gal,start:'top top',end:()=>'+='+dist(),pin:true,scrub:.5,invalidateOnRefresh:true,anticipatePin:1}});
+      g.to(track,{x:()=>-dist(),ease:'none',scrollTrigger:{trigger:gal,start:'top top',end:()=>'+='+dist(),pin:true,scrub:.5,invalidateOnRefresh:true,anticipatePin:1}});}
       // no list
       q('[data-no]').forEach(l=>{g.fromTo(l.children[0],{opacity:.12},{opacity:1,ease:'none',scrollTrigger:{trigger:l,start:'top 85%',end:'top 50%',scrub:true}});g.to(l.querySelector('[data-noline]'),{scaleX:1,ease:'none',scrollTrigger:{trigger:l,start:'top 85%',end:'top 45%',scrub:true}})});
       // pricing

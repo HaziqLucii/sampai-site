@@ -32,9 +32,14 @@
   [data-ndone] > span:first-child { width: 64px !important; height: 64px !important; }
   [data-ndone] > span:last-child { font-size: 22px !important; }
   section, footer { padding-top: 88px !important; padding-bottom: 88px !important; }
-  [data-gal] { padding: 0 !important; }
-  [data-gal] > div:first-child, [data-track] { padding-left: 20px !important; padding-right: 20px !important; }
-  [data-track] { gap: 20px !important; }
+  [data-gal] { padding: 88px 0 !important; height: auto !important; display: block !important; }
+  [data-gal] > div:first-child { padding-left: 20px !important; padding-right: 20px !important; }
+  [data-gal] > div:first-child > span { display: none; }
+  /* Phones get a native sideways swipe that snaps to each screen, not a pinned scroll. */
+  [data-track] { width: auto !important; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; gap: 16px !important; padding: 28px 20px 4px !important; }
+  [data-track]::-webkit-scrollbar { display: none; }
+  [data-track] > div { scroll-snap-align: start; scroll-margin-left: 20px; }
+  [data-gal] > div:first-child::after { content: "Swipe \2192"; display: block; margin-top: 12px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: rgba(var(--i), .6); }
   [data-no] { flex-direction: column; align-items: flex-start !important; gap: 6px !important; }
   [data-no] > span:nth-child(2) { text-align: left !important; }
   [data-bell] { width: 90px !important; }
@@ -173,7 +178,7 @@
 <h2 style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(30px,3.6vw,52px);line-height:1;letter-spacing:-.02em">Every screen, filed.</h2>
 <span style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(var(--i),.6);white-space:nowrap">04 · Scroll →</span>
 </div>
-<div data-track="" style="display:flex;gap:40px;padding:36px clamp(20px,4vw,56px) 0 clamp(48px,6vw,96px);width:max-content">
+<div data-track="" data-lenis-prevent-touch="" style="display:flex;gap:40px;padding:36px clamp(20px,4vw,56px) 0 clamp(48px,6vw,96px);width:max-content">
 
 <div style="flex:none;width:252px;display:flex;flex-direction:column;gap:14px">
 <div style="width:252px;height:560px;overflow:hidden;border:1px solid rgba(var(--i),.42);border-radius:2px;position:relative"><img src="assets/screens/07-onboarding.jpg" width="252" height="560" alt="Onboarding screen. Four permissions, each with one plain sentence." style="display:block;width:100%;height:100%;object-fit:cover"></div>
