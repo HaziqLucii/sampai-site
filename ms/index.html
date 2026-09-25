@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sampai: peringatan yang berdering sehingga siap</title>
+<meta name="description" content="Sampai ialah aplikasi peringatan Android yang berdering semula setiap 1, 5, 10, 15, 30 atau 60 minit sehingga anda ketik Selesai. Luar talian, tiada akaun, tiada iklan.">
+<meta property="og:title" content="Sampai: peringatan yang berdering sehingga siap">
+<meta property="og:description" content="Sampai ialah aplikasi peringatan Android yang berdering semula setiap 1, 5, 10, 15, 30 atau 60 minit sehingga anda ketik Selesai. Luar talian, tiada akaun, tiada iklan.">
+<meta property="og:image" content="../assets/screens/03-alert-4.jpg">
+<meta name="theme-color" content="#0b0a09">
+<link rel="alternate" hreflang="en" href="https://haziqlucii.github.io/sampai-site/">
+<link rel="alternate" hreflang="ms" href="https://haziqlucii.github.io/sampai-site/ms/">
+<link rel="alternate" hreflang="id" href="https://haziqlucii.github.io/sampai-site/id/">
+<link rel="icon" href="../assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..500;1,9..144,300..500&family=Space+Grotesk:wght@400;500;600&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"><style>:root{--p:11,10,9;--i:205,196,186}html,body{margin:0;background:rgb(var(--p));color:rgb(var(--i));-webkit-font-smoothing:antialiased;overflow-x:hidden}html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!important}body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opacity:.07;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 1.4 -.3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}a{color:rgb(var(--i))}a:hover{color:rgba(var(--i),.7)}::selection{background:rgb(var(--i));color:rgb(var(--p))}</style>
+<style>
+/* Phone layout: the design is drawn for desktop, so these override its inline spacing. */
+@media (max-width: 720px) {
+  [data-label] { display: none !important; }
+  [data-nav] > div { padding: 0 20px !important; height: 56px !important; }
+  [data-nav] a[href="#top"] > span + span { display: none; }
+  [data-nav] a[href="#nag"], [data-nav] a[href="#reliable"], [data-nav] a[href="#pricing"] { display: none; }
+  #top, section, footer { padding-left: 20px !important; padding-right: 20px !important; }
+  #top { padding-top: 96px !important; min-height: auto !important; gap: 40px !important; }
+  #top + div { margin-left: 20px !important; }
+  [data-nag] { height: auto !important; min-height: 100vh; padding-top: 72px !important; padding-bottom: 40px !important; gap: 20px !important; align-content: center; }
+  [data-nag] h2 { font-size: 34px !important; }
+  [data-nag] > div:last-child { min-height: 0 !important; }
+  [data-nag] [data-nn] { font-size: 150px !important; }
+  [data-nag] > div:last-child > div:first-child { height: 130px !important; }
+  [data-nag] > div:last-child > div:last-child { margin-top: 24px !important; }
+  [data-ndone] > span:first-child { width: 64px !important; height: 64px !important; }
+  [data-ndone] > span:last-child { font-size: 22px !important; }
+  section, footer { padding-top: 88px !important; padding-bottom: 88px !important; }
+  [data-gal] { padding: 88px 0 !important; height: auto !important; display: block !important; }
+  [data-gal] > div:first-child { padding-left: 20px !important; padding-right: 20px !important; }
+  [data-gal] > div:first-child > span { display: none; }
+  /* Phones get a native sideways swipe that snaps to each screen, not a pinned scroll. */
+  [data-track] { width: auto !important; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; gap: 16px !important; padding: 28px 20px 4px !important; }
+  [data-track]::-webkit-scrollbar { display: none; }
+  [data-track] > div { scroll-snap-align: start; scroll-margin-left: 20px; }
+  [data-gal] > div:first-child::after { content: "Leret \2192"; display: block; margin-top: 12px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: rgba(var(--i), .6); }
+  [data-no] { flex-direction: column; align-items: flex-start !important; gap: 6px !important; }
+  [data-no] > span:nth-child(2) { text-align: left !important; }
+  [data-bell] { width: 90px !important; }
+  section[data-sec^="07"] { padding-left: 0 !important; padding-right: 0 !important; }
+  section[data-sec^="07"] > div:first-child { padding-left: 20px !important; padding-right: 20px !important; }
+  footer > div[style*="margin-top:140px"] { margin-top: 80px !important; }
+}
+</style>
+</head>
+<body>
+<div data-root="" style="position:relative;font-family:'Space Mono',monospace;color:rgb(var(--i));background:rgb(var(--p))">
+
+<div data-prog="" style="position:fixed;top:0;left:0;right:0;height:1px;background:rgb(var(--i));transform:scaleX(0);transform-origin:0 50%;z-index:80"></div>
+<div data-label="" style="position:fixed;left:16px;top:50%;transform:translateY(-50%) rotate(180deg);writing-mode:vertical-rl;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:rgba(var(--i),.45);z-index:70;white-space:nowrap;pointer-events:none">00 · Difailkan · 25.09.2026</div>
+
+<nav data-nav="" style="position:fixed;top:0;left:0;right:0;z-index:75;background:rgb(var(--p));border-bottom:1px solid rgba(var(--i),.2)">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:20px;height:60px;padding:0 clamp(20px,4vw,56px) 0 clamp(48px,6vw,96px)">
+<a href="#top" style="display:flex;align-items:baseline;gap:12px;text-decoration:none"><span style="font-size:12px;letter-spacing:.18em;font-weight:700">SAMPAI</span><span style="font-size:10.5px;color:rgba(var(--i),.5)">Sampai siap.</span></a>
+<div style="display:flex;align-items:center;gap:clamp(14px,2.4vw,32px);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase">
+<a href="#nag" style="text-decoration:none;color:rgba(var(--i),.7)">Cara ia menggesa</a>
+<a href="#reliable" style="text-decoration:none;color:rgba(var(--i),.7)">Kebolehpercayaan</a>
+<a href="#pricing" style="text-decoration:none;color:rgba(var(--i),.7)">Harga</a>
+<span data-langs="" style="display:flex;gap:10px"><a href="../" hreflang="en" style="text-decoration:none;color:rgba(var(--i),.5)">EN</a><a href="../ms/" hreflang="ms" aria-current="page" style="text-decoration:none;color:rgb(var(--i))">MS</a><a href="../id/" hreflang="id" style="text-decoration:none;color:rgba(var(--i),.5)">ID</a></span><a href="#get" style="height:34px;padding:0 14px;display:flex;align-items:center;border:1px solid rgba(var(--i),.42);border-radius:2px;text-decoration:none">Akan datang</a>
+</div>
+</div>
+</nav>
+
+<header id="top" data-hero="" data-sec="00 · Difailkan · 25.09.2026" style="position:relative;min-height:100vh;padding:120px clamp(20px,4vw,56px) 56px clamp(48px,6vw,96px);box-sizing:border-box;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:48px;align-items:center;overflow:hidden">
+<div style="position:relative;z-index:2">
+<div data-hf="" style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(var(--i),.6)">Peringatan Android · Luar talian · EN / MS / ID</div>
+<h1 data-hword="" aria-label="Sampai" style="margin:28px 0 0;font-family:'Fraunces',serif;font-weight:350;font-size:clamp(96px,17vw,264px);line-height:.86;letter-spacing:-.035em;display:flex">
+<span style="display:inline-block;overflow:hidden;padding-bottom:.14em"><span data-hl="" style="display:inline-block">S</span></span><span style="display:inline-block;overflow:hidden;padding-bottom:.14em"><span data-hl="" style="display:inline-block">a</span></span><span style="display:inline-block;overflow:hidden;padding-bottom:.14em"><span data-hl="" style="display:inline-block">m</span></span><span style="display:inline-block;overflow:hidden;padding-bottom:.14em"><span data-hl="" style="display:inline-block">p</span></span><span style="display:inline-block;overflow:hidden;padding-bottom:.14em"><span data-hl="" style="display:inline-block">a</span></span><span style="display:inline-block;overflow:hidden;padding-bottom:.14em"><span data-hl="" style="display:inline-block">i</span></span>
+</h1>
+<p data-hf="" style="margin:18px 0 0;font-family:'Space Grotesk',sans-serif;font-size:clamp(22px,2.4vw,32px);line-height:1.2;font-weight:400;max-width:520px;text-wrap:pretty">Peringatan yang berdering lagi sehingga anda ketik Selesai.</p>
+<p data-hf="" style="margin:18px 0 0;font-size:13px;line-height:1.75;color:rgba(var(--i),.7);max-width:460px;text-wrap:pretty">Berdering sehingga kerja betul-betul siap. Percuma untuk tiga peringatan aktif. Tiada akaun, tiada awan, tiada iklan.</p>
+<div data-hf="" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:32px;align-items:center">
+<a href="#get" style="display:inline-flex;align-items:center;gap:14px;height:56px;padding:0 22px;background:rgb(var(--i));color:rgb(var(--p));border-radius:2px;text-decoration:none"><span style="width:10px;height:10px;background:currentColor"></span><span style="display:flex;flex-direction:column;line-height:1.15"><span style="font-size:9px;letter-spacing:.16em">AKAN DATANG DI</span><span style="font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:500">Google Play</span></span></a>
+<a href="#nag" style="height:56px;padding:0 20px;display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(var(--i),.42);border-radius:2px;text-decoration:none;font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:500">Lihat cara ia menggesa <span style="font-family:'Space Mono',monospace">↓</span></a>
+</div>
+</div>
+<div data-hpar="" style="position:relative;z-index:1;justify-self:center"><div data-hphone="" style="display:flex;flex-direction:column;gap:12px">
+<div style="width:280px;height:622px;overflow:hidden;border:1px solid rgba(var(--i),.42);border-radius:2px;position:relative"><img src="../assets/screens/03-alert-4.jpg" width="280" height="622" alt="Amaran Sampai di skrin kunci: angka 4 yang besar, peringatan Call Mak about Sunday lunch, dan butang Selesai, Tunda dan Jadual semula." style="display:block;width:100%;height:100%;object-fit:cover"></div>
+<div style="display:flex;justify-content:space-between;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(var(--i),.5)"><span>Rajah 1</span><span>Amaran 4 · Skrin kunci</span></div>
+</div></div>
+<div data-hwm="" style="position:absolute;right:-4vw;bottom:-8vw;font-family:'Fraunces',serif;font-weight:300;font-size:46vw;line-height:.8;letter-spacing:-.06em;color:rgba(var(--i),.045);pointer-events:none;user-select:none;z-index:0">4</div>
+</header>
+
+<div style="border-top:1px solid rgba(var(--i),.2);border-bottom:1px solid rgba(var(--i),.2);margin-left:clamp(48px,6vw,96px);display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr))">
+<div data-fact="" style="padding:18px 20px 20px 0;border-right:1px solid rgba(var(--i),.1)"><div style="font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(var(--i),.55)">Berdering semula setiap</div><div style="font-size:clamp(22px,2.4vw,30px);margin-top:10px;font-variant-numeric:tabular-nums">1–60 min</div></div><div data-fact="" style="padding:18px 20px 20px 0;border-right:1px solid rgba(var(--i),.1)"><div style="font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(var(--i),.55)">Akaun</div><div style="font-size:clamp(22px,2.4vw,30px);margin-top:10px;font-variant-numeric:tabular-nums">Tiada</div></div><div data-fact="" style="padding:18px 20px 20px 0;border-right:1px solid rgba(var(--i),.1)"><div style="font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(var(--i),.55)">Data</div><div style="font-size:clamp(22px,2.4vw,30px);margin-top:10px;font-variant-numeric:tabular-nums">Dalam peranti</div></div><div data-fact="" style="padding:18px 20px 20px 0;border-right:1px solid rgba(var(--i),.1)"><div style="font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(var(--i),.55)">Pelan percuma</div><div style="font-size:clamp(22px,2.4vw,30px);margin-top:10px;font-variant-numeric:tabular-nums">3 aktif</div></div>
+</div>
+
+<section id="nag" data-nag="" data-sec="01 · Gesaan" style="position:relative;height:100vh;padding:80px clamp(20px,4vw,56px) 40px clamp(48px,6vw,96px);box-sizing:border-box;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:40px;align-items:center;overflow:hidden">
+<div>
+<div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(var(--i),.6)">01 · Gesaan</div>
+<h2 style="margin:18px 0 0;font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(36px,5vw,72px);line-height:1.02;letter-spacing:-.02em;max-width:560px">Ia berdering. Kemudian berdering lagi.</h2>
+<p style="margin:22px 0 0;font-size:13.5px;line-height:1.75;color:rgba(var(--i),.8);max-width:440px;text-wrap:pretty">Peringatan berbunyi tepat pada masanya, kemudian berdering semula setiap 1, 5, 10, 15, 30 atau 60 minit sehingga anda ketik Selesai atau jadualkan semula. Tenang, tetapi tidak berhenti.</p>
+<div style="margin-top:32px;max-width:440px">
+<div style="position:relative;height:1px;background:rgba(var(--i),.2)"><div data-nline="" style="position:absolute;inset:0;background:rgb(var(--i));transform:scaleX(0);transform-origin:0 50%"></div></div>
+<div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin-top:12px">
+<div style="display:flex;flex-direction:column;gap:8px"><span style="position:relative;width:10px;height:10px;border:1px solid rgb(var(--i));box-sizing:border-box"><span data-nt="" style="position:absolute;inset:1px;background:rgb(var(--i));opacity:1"></span></span><span style="font-size:10px;letter-spacing:.08em;color:rgba(var(--i),.6);font-variant-numeric:tabular-nums">09:00</span></div><div style="display:flex;flex-direction:column;gap:8px"><span style="position:relative;width:10px;height:10px;border:1px solid rgb(var(--i));box-sizing:border-box"><span data-nt="" style="position:absolute;inset:1px;background:rgb(var(--i));opacity:0"></span></span><span style="font-size:10px;letter-spacing:.08em;color:rgba(var(--i),.6);font-variant-numeric:tabular-nums">09:10</span></div><div style="display:flex;flex-direction:column;gap:8px"><span style="position:relative;width:10px;height:10px;border:1px solid rgb(var(--i));box-sizing:border-box"><span data-nt="" style="position:absolute;inset:1px;background:rgb(var(--i));opacity:0"></span></span><span style="font-size:10px;letter-spacing:.08em;color:rgba(var(--i),.6);font-variant-numeric:tabular-nums">09:20</span></div><div style="display:flex;flex-direction:column;gap:8px"><span style="position:relative;width:10px;height:10px;border:1px solid rgb(var(--i));box-sizing:border-box"><span data-nt="" style="position:absolute;inset:1px;background:rgb(var(--i));opacity:0"></span></span><span style="font-size:10px;letter-spacing:.08em;color:rgba(var(--i),.6);font-variant-numeric:tabular-nums">09:30</span></div><div style="display:flex;flex-direction:column;gap:8px"><span style="position:relative;width:10px;height:10px;border:1px solid rgb(var(--i));box-sizing:border-box"><span data-nt="" style="position:absolute;inset:1px;background:rgb(var(--i));opacity:0"></span></span><span style="font-size:10px;letter-spacing:.08em;color:rgba(var(--i),.6);font-variant-numeric:tabular-nums">Selesai</span></div>
+</div>
+</div>
+</div>
+<div style="position:relative;min-height:min(62vh,520px);display:flex;flex-direction:column;justify-content:center">
+<div style="position:relative;height:clamp(170px,26vw,380px)">
+<div data-nn="" style="position:absolute;left:0;bottom:0;font-family:'Fraunces',serif;font-weight:300;font-size:clamp(210px,32vw,470px);line-height:.8;letter-spacing:-.05em;font-variant-numeric:tabular-nums;opacity:1">1</div><div data-nn="" style="position:absolute;left:0;bottom:0;font-family:'Fraunces',serif;font-weight:300;font-size:clamp(210px,32vw,470px);line-height:.8;letter-spacing:-.05em;font-variant-numeric:tabular-nums;opacity:0">2</div><div data-nn="" style="position:absolute;left:0;bottom:0;font-family:'Fraunces',serif;font-weight:300;font-size:clamp(210px,32vw,470px);line-height:.8;letter-spacing:-.05em;font-variant-numeric:tabular-nums;opacity:0">3</div><div data-nn="" style="position:absolute;left:0;bottom:0;font-family:'Fraunces',serif;font-weight:300;font-size:clamp(210px,32vw,470px);line-height:.8;letter-spacing:-.05em;font-variant-numeric:tabular-nums;opacity:0">4</div>
+<div data-ndone="" style="position:absolute;left:0;bottom:0;opacity:0;display:flex;flex-direction:column;gap:22px"><span style="width:clamp(90px,12vw,160px);height:clamp(90px,12vw,160px);background:rgb(var(--i))"></span><span style="font-family:'Space Grotesk',sans-serif;font-size:clamp(26px,3vw,40px);font-weight:500;line-height:1.1">Selesai selepas 4 amaran.<br>Difailkan.</span></div>
+</div>
+<div style="position:relative;height:20px;margin-top:56px">
+<div data-nc="" style="position:absolute;left:0;top:0;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-variant-numeric:tabular-nums;opacity:1">Amaran 1 · 09:00 · Setiap 10 min</div><div data-nc="" style="position:absolute;left:0;top:0;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-variant-numeric:tabular-nums;opacity:0">Amaran 2 · 09:10 · Setiap 10 min</div><div data-nc="" style="position:absolute;left:0;top:0;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-variant-numeric:tabular-nums;opacity:0">Amaran 3 · 09:20 · Setiap 10 min</div><div data-nc="" style="position:absolute;left:0;top:0;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-variant-numeric:tabular-nums;opacity:0">Amaran 4 · 09:30 · Setiap 10 min</div>
+</div>
+</div>
+</section>
+
+<section data-sec="02 · Lima saat" style="position:relative;padding:120px clamp(20px,4vw,56px) 120px clamp(48px,6vw,96px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:56px;align-items:center;border-top:1px solid rgba(var(--i),.2)">
+<div data-cphone="" style="justify-self:center;display:flex;flex-direction:column;gap:12px">
+<div style="width:280px;height:622px;overflow:hidden;border:1px solid rgba(var(--i),.42);border-radius:2px;position:relative"><img src="../assets/screens/02-create.jpg" width="280" height="622" alt="Helaian peringatan baharu dengan cip masa, cip selang gesaan dari 1 hingga 60 minit dan butang Simpan." style="display:block;width:100%;height:100%;object-fit:cover"></div>
+<div style="display:flex;justify-content:space-between;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(var(--i),.5)"><span>Rajah 2</span><span>Cipta · papan kekunci sedia</span></div>
+</div>
+<div>
+<div data-r="" style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(var(--i),.6)">02 · Lima saat</div>
+<h2 data-r="" style="margin:18px 0 0;font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(36px,5vw,72px);line-height:1.02;letter-spacing:-.02em">Tajuk, satu cip, Simpan.</h2>
+<p data-r="" style="margin:22px 0 0;font-size:13.5px;line-height:1.75;color:rgba(var(--i),.8);max-width:460px;text-wrap:pretty">Helaian dibuka dengan papan kekunci sudah sedia. Semua yang diperlukan dalam jangkauan ibu jari, jadi peringatan siap dalam kurang lima saat.</p>
+<div style="margin-top:36px;border-top:1px solid rgba(var(--i),.2);max-width:500px">
+<div data-step="" style="display:grid;grid-template-columns:56px minmax(0,1fr);gap:16px;padding:20px 0;border-bottom:1px solid rgba(var(--i),.2)"><span style="font-size:28px;line-height:1;font-variant-numeric:tabular-nums;color:rgba(var(--i),.4)">01</span><div><div style="font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:500">Taip tajuk</div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px"></div></div></div><div data-step="" style="display:grid;grid-template-columns:56px minmax(0,1fr);gap:16px;padding:20px 0;border-bottom:1px solid rgba(var(--i),.2)"><span style="font-size:28px;line-height:1;font-variant-numeric:tabular-nums;color:rgba(var(--i),.4)">02</span><div><div style="font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:500">Ketik cip masa</div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px"><span data-chip="" style="height:30px;padding:0 10px;display:flex;align-items:center;border:1px solid rgba(var(--i),.2);border-radius:2px;font-size:11px;color:rgba(var(--i),.86);white-space:nowrap">Dalam 30 min</span><span data-chip="" style="height:30px;padding:0 10px;display:flex;align-items:center;border:1px solid rgba(var(--i),.2);border-radius:2px;font-size:11px;color:rgba(var(--i),.86);white-space:nowrap">Dalam 1 jam</span><span data-chip="" style="height:30px;padding:0 10px;display:flex;align-items:center;border:1px solid rgba(var(--i),.2);border-radius:2px;font-size:11px;color:rgba(var(--i),.86);white-space:nowrap">Malam ini 8 mlm</span><span data-chip="" style="height:30px;padding:0 10px;display:flex;align-items:center;border:1px solid rgba(var(--i),.2);border-radius:2px;font-size:11px;color:rgba(var(--i),.86);white-space:nowrap">Esok 9 pagi</span></div></div></div><div data-step="" style="display:grid;grid-template-columns:56px minmax(0,1fr);gap:16px;padding:20px 0;border-bottom:1px solid rgba(var(--i),.2)"><span style="font-size:28px;line-height:1;font-variant-numeric:tabular-nums;color:rgba(var(--i),.4)">03</span><div><div style="font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:500">Pilih gesaan, Simpan</div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px"><span data-chip="" style="height:30px;padding:0 10px;display:flex;align-items:center;border:1px solid rgba(var(--i),.2);border-radius:2px;font-size:11px;color:rgba(var(--i),.86);white-space:nowrap">1</span><span data-chip="" style="height:30px;padding:0 10px;display:flex;align-items:center;border:1px solid rgba(var(--i),.2);border-radius:2px;font-size:11px;color:rgba(var(--i),.86);white-space:nowrap">5</span><span data-chip="" style="height:30px;padding:0 10px;display:flex;align-items:center;border:1px solid rgba(var(--i),.2);border-radius:2px;font-size:11px;color:rgba(var(--i),.86);white-space:nowrap">10</span><span data-chip="" style="height:30px;padding:0 10px;display:flex;align-items:center;border:1px solid rgba(var(--i),.2);border-radius:2px;font-size:11px;color:rgba(var(--i),.86);white-space:nowrap">15</span><span data-chip="" style="height:30px;padding:0 10px;display:flex;align-items:center;border:1px solid rgba(var(--i),.2);border-radius:2px;font-size:11px;color:rgba(var(--i),.86);white-space:nowrap">30</span><span data-chip="" style="height:30px;padding:0 10px;display:flex;align-items:center;border:1px solid rgba(var(--i),.2);border-radius:2px;font-size:11px;color:rgba(var(--i),.86);white-space:nowrap">60 min</span></div></div></div>
+</div>
+</div>
+</section>
+
+<section id="reliable" data-rel="" data-sec="03 · Kebolehpercayaan" style="position:relative;padding:120px clamp(20px,4vw,56px) 120px clamp(48px,6vw,96px);border-top:1px solid rgba(var(--i),.2);overflow:hidden">
+<div data-r="" style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(var(--i),.6)">03 · Kebolehpercayaan</div>
+<h2 data-r="" style="margin:18px 0 0;font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(36px,5vw,72px);line-height:1.02;letter-spacing:-.02em;max-width:820px">9:00 bermakna 9:00. Bukan 9:07.</h2>
+<p data-r="" style="margin:22px 0 0;font-size:13.5px;line-height:1.75;color:rgba(var(--i),.8);max-width:560px;text-wrap:pretty">Android agresif mematikan aplikasi latar belakang untuk menjimatkan bateri, jadi peringatan anda gagal tanpa disedari. Sampai membimbing anda melalui 4 kebenaran penting yang memastikan amaran kekal aktif, menyemak kelemahan khusus jenama telefon, dan menghantar deringan ujian untuk membuktikan ia berfungsi.</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:48px;margin-top:48px;align-items:end">
+<div style="border-top:1px solid rgba(var(--i),.2)">
+
+<div data-perm="" style="display:grid;grid-template-columns:22px minmax(0,1fr) 76px;gap:12px;padding:18px 0;border-bottom:1px solid rgba(var(--i),.2);align-items:start">
+<span style="position:relative;width:12px;height:12px;border:1px solid rgb(var(--i));box-sizing:border-box;margin-top:2px"><span data-pf="" style="position:absolute;inset:1px;background:rgb(var(--i));transform:scale(0)"></span></span>
+<div><div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase">Pemberitahuan</div><div style="font-size:12.5px;line-height:1.6;color:rgba(var(--i),.75);margin-top:6px;text-wrap:pretty">Memastikan peringatan anda berbunyi dan muncul di laci pemberitahuan.</div></div>
+<span style="position:relative;height:16px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;text-align:right"><span data-poff="" style="position:absolute;right:0;top:0;color:rgba(var(--i),.5);white-space:nowrap">Belum</span><span data-pon="" style="position:absolute;right:0;top:0;opacity:0">OK</span></span>
+</div>
+
+<div data-perm="" style="display:grid;grid-template-columns:22px minmax(0,1fr) 76px;gap:12px;padding:18px 0;border-bottom:1px solid rgba(var(--i),.2);align-items:start">
+<span style="position:relative;width:12px;height:12px;border:1px solid rgb(var(--i));box-sizing:border-box;margin-top:2px"><span data-pf="" style="position:absolute;inset:1px;background:rgb(var(--i));transform:scale(0)"></span></span>
+<div><div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase">Penggera &amp; Peringatan</div><div style="font-size:12.5px;line-height:1.6;color:rgba(var(--i),.75);margin-top:6px;text-wrap:pretty">Memintas sekatan sistem supaya amaran berbunyi tepat hingga ke saat.</div></div>
+<span style="position:relative;height:16px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;text-align:right"><span data-poff="" style="position:absolute;right:0;top:0;color:rgba(var(--i),.5);white-space:nowrap">Belum</span><span data-pon="" style="position:absolute;right:0;top:0;opacity:0">OK</span></span>
+</div>
+
+<div data-perm="" style="display:grid;grid-template-columns:22px minmax(0,1fr) 76px;gap:12px;padding:18px 0;border-bottom:1px solid rgba(var(--i),.2);align-items:start">
+<span style="position:relative;width:12px;height:12px;border:1px solid rgb(var(--i));box-sizing:border-box;margin-top:2px"><span data-pf="" style="position:absolute;inset:1px;background:rgb(var(--i));transform:scale(0)"></span></span>
+<div><div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase">Amaran Skrin Penuh</div><div style="font-size:12.5px;line-height:1.6;color:rgba(var(--i),.75);margin-top:6px;text-wrap:pretty">Menghidupkan skrin dan menuntut perhatian, sama seperti jam loceng sebenar.</div></div>
+<span style="position:relative;height:16px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;text-align:right"><span data-poff="" style="position:absolute;right:0;top:0;color:rgba(var(--i),.5);white-space:nowrap">Belum</span><span data-pon="" style="position:absolute;right:0;top:0;opacity:0">OK</span></span>
+</div>
+
+<div data-perm="" style="display:grid;grid-template-columns:22px minmax(0,1fr) 76px;gap:12px;padding:18px 0;border-bottom:1px solid rgba(var(--i),.2);align-items:start">
+<span style="position:relative;width:12px;height:12px;border:1px solid rgb(var(--i));box-sizing:border-box;margin-top:2px"><span data-pf="" style="position:absolute;inset:1px;background:rgb(var(--i));transform:scale(0)"></span></span>
+<div><div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase">Bateri Tanpa Had</div><div style="font-size:12.5px;line-height:1.6;color:rgba(var(--i),.75);margin-top:6px;text-wrap:pretty">Menghalang Android daripada menidurkan Sampai. Punca utama amaran terlepas.</div></div>
+<span style="position:relative;height:16px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;text-align:right"><span data-poff="" style="position:absolute;right:0;top:0;color:rgba(var(--i),.5);white-space:nowrap">Belum</span><span data-pon="" style="position:absolute;right:0;top:0;opacity:0">OK</span></span>
+</div>
+
+<div data-perm="" style="display:grid;grid-template-columns:22px minmax(0,1fr);gap:12px;padding:18px 0;border-bottom:1px solid rgba(var(--i),.2)"><span style="font-size:12px;color:rgba(var(--i),.6)">!</span><span style="font-size:12.5px;line-height:1.6;color:rgba(var(--i),.86)"><span style="display:block;font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:500;color:rgb(var(--i));margin-bottom:6px">Dibina untuk kepelbagaian Android.</span>Mengesan secara automatik aplikasi yang dimatikan secara agresif pada Samsung, Xiaomi, OPPO, vivo, OnePlus dan Honor, dan membawa anda terus ke suis tersembunyi untuk membetulkannya.</span></div>
+</div>
+<div style="border:1px solid rgba(var(--i),.42);border-radius:2px;padding:24px">
+<div style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(var(--i),.6)">Ujian · Deringkan saya dalam 10 saat. Kunci telefon anda.</div>
+<div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-top:18px">
+<span data-cd="" style="font-family:'Fraunces',serif;font-weight:300;font-size:clamp(140px,16vw,230px);line-height:.8;letter-spacing:-.05em;font-variant-numeric:tabular-nums">10</span>
+<span style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(var(--i),.5);padding-bottom:8px">Saat</span>
+</div>
+<div data-cdres="" style="display:flex;align-items:center;gap:12px;margin-top:22px;padding-top:18px;border-top:1px solid rgba(var(--i),.2);opacity:0"><span style="position:relative;width:14px;height:14px;border:1px solid rgb(var(--i));box-sizing:border-box;flex:none"><span style="position:absolute;inset:2px;background:rgb(var(--i))"></span></span><span style="font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:500">Lulus. Sampai boleh membangunkan telefon ini.</span></div>
+</div>
+</div>
+</section>
+
+<section data-gal="" data-sec="04 · Setiap skrin" style="position:relative;height:100vh;overflow:hidden;border-top:1px solid rgba(var(--i),.2);display:flex;flex-direction:column;justify-content:center">
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:0 clamp(20px,4vw,56px) 0 clamp(48px,6vw,96px)">
+<h2 style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(30px,3.6vw,52px);line-height:1;letter-spacing:-.02em">Setiap skrin, difailkan.</h2>
+<span style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(var(--i),.6);white-space:nowrap">04 · Tatal →</span>
+</div>
+<div data-track="" data-lenis-prevent-touch="" style="display:flex;gap:40px;padding:36px clamp(20px,4vw,56px) 0 clamp(48px,6vw,96px);width:max-content">
+
+<div style="flex:none;width:252px;display:flex;flex-direction:column;gap:14px">
+<div style="width:252px;height:560px;overflow:hidden;border:1px solid rgba(var(--i),.42);border-radius:2px;position:relative"><img src="../assets/screens/07-onboarding.jpg" width="252" height="560" alt="Permulaan: Empat kebenaran, setiap satu dengan satu ayat mudah." style="display:block;width:100%;height:100%;object-fit:cover"></div>
+<div style="display:grid;grid-template-columns:28px minmax(0,1fr);gap:8px"><span style="font-size:10px;letter-spacing:.1em;color:rgba(var(--i),.45)">01</span><div><div style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase">Permulaan</div><div style="font-size:11.5px;line-height:1.55;color:rgba(var(--i),.65);margin-top:5px">Empat kebenaran, setiap satu dengan satu ayat mudah.</div></div></div>
+</div>
+
+<div style="flex:none;width:252px;display:flex;flex-direction:column;gap:14px">
+<div style="width:252px;height:560px;overflow:hidden;border:1px solid rgba(var(--i),.42);border-radius:2px;position:relative"><img src="../assets/screens/08-reliability-passed.jpg" width="252" height="560" alt="Kebolehpercayaan: Berdering dalam 10 saat untuk membuktikan ia berfungsi." style="display:block;width:100%;height:100%;object-fit:cover"></div>
+<div style="display:grid;grid-template-columns:28px minmax(0,1fr);gap:8px"><span style="font-size:10px;letter-spacing:.1em;color:rgba(var(--i),.45)">02</span><div><div style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase">Kebolehpercayaan</div><div style="font-size:11.5px;line-height:1.55;color:rgba(var(--i),.65);margin-top:5px">Berdering dalam 10 saat untuk membuktikan ia berfungsi.</div></div></div>
+</div>
+
+<div style="flex:none;width:252px;display:flex;flex-direction:column;gap:14px">
+<div style="width:252px;height:560px;overflow:hidden;border:1px solid rgba(var(--i),.42);border-radius:2px;position:relative"><img src="../assets/screens/01-home.jpg" width="252" height="560" alt="Utama: Yang lewat di atas. Leret ke kanan untuk Selesai, ke kiri untuk Tunda." style="display:block;width:100%;height:100%;object-fit:cover"></div>
+<div style="display:grid;grid-template-columns:28px minmax(0,1fr);gap:8px"><span style="font-size:10px;letter-spacing:.1em;color:rgba(var(--i),.45)">03</span><div><div style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase">Utama</div><div style="font-size:11.5px;line-height:1.55;color:rgba(var(--i),.65);margin-top:5px">Yang lewat di atas. Leret ke kanan untuk Selesai, ke kiri untuk Tunda.</div></div></div>
+</div>
+
+<div style="flex:none;width:252px;display:flex;flex-direction:column;gap:14px">
+<div style="width:252px;height:560px;overflow:hidden;border:1px solid rgba(var(--i),.42);border-radius:2px;position:relative"><img src="../assets/screens/03-alert-4.jpg" width="252" height="560" alt="Amaran: Mengambil alih skrin kunci seperti jam loceng." style="display:block;width:100%;height:100%;object-fit:cover"></div>
+<div style="display:grid;grid-template-columns:28px minmax(0,1fr);gap:8px"><span style="font-size:10px;letter-spacing:.1em;color:rgba(var(--i),.45)">04</span><div><div style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase">Amaran</div><div style="font-size:11.5px;line-height:1.55;color:rgba(var(--i),.65);margin-top:5px">Mengambil alih skrin kunci seperti jam loceng.</div></div></div>
+</div>
+
+<div style="flex:none;width:252px;display:flex;flex-direction:column;gap:14px">
+<div style="width:252px;height:560px;overflow:hidden;border:1px solid rgba(var(--i),.42);border-radius:2px;position:relative"><img src="../assets/screens/05-history.jpg" width="252" height="560" alt="Sejarah: Item selesai disimpan di sini selama 30 hari." style="display:block;width:100%;height:100%;object-fit:cover"></div>
+<div style="display:grid;grid-template-columns:28px minmax(0,1fr);gap:8px"><span style="font-size:10px;letter-spacing:.1em;color:rgba(var(--i),.45)">05</span><div><div style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase">Sejarah</div><div style="font-size:11.5px;line-height:1.55;color:rgba(var(--i),.65);margin-top:5px">Item selesai disimpan di sini selama 30 hari.</div></div></div>
+</div>
+
+<div style="flex:none;width:252px;display:flex;flex-direction:column;gap:14px">
+<div style="width:252px;height:560px;overflow:hidden;border:1px solid rgba(var(--i),.42);border-radius:2px;position:relative"><img src="../assets/screens/04-widgets.jpg" width="252" height="560" alt="Widget: Seterusnya dan Akan datang di skrin utama. Pro." style="display:block;width:100%;height:100%;object-fit:cover"></div>
+<div style="display:grid;grid-template-columns:28px minmax(0,1fr);gap:8px"><span style="font-size:10px;letter-spacing:.1em;color:rgba(var(--i),.45)">06</span><div><div style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase">Widget</div><div style="font-size:11.5px;line-height:1.55;color:rgba(var(--i),.65);margin-top:5px">Seterusnya dan Akan datang di skrin utama. Pro.</div></div></div>
+</div>
+
+<div style="flex:none;width:252px;display:flex;flex-direction:column;gap:14px">
+<div style="width:252px;height:560px;overflow:hidden;border:1px solid rgba(var(--i),.42);border-radius:2px;position:relative"><img src="../assets/screens/06-settings.jpg" width="252" height="560" alt="Tetapan: Eksport ke fail biasa. Import semula." style="display:block;width:100%;height:100%;object-fit:cover"></div>
+<div style="display:grid;grid-template-columns:28px minmax(0,1fr);gap:8px"><span style="font-size:10px;letter-spacing:.1em;color:rgba(var(--i),.45)">07</span><div><div style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase">Tetapan</div><div style="font-size:11.5px;line-height:1.55;color:rgba(var(--i),.65);margin-top:5px">Eksport ke fail biasa. Import semula.</div></div></div>
+</div>
+
+</div>
+</section>
+
+<section data-sec="05 · Apa yang ia tidak buat" style="position:relative;padding:140px clamp(20px,4vw,56px) 140px clamp(48px,6vw,96px);border-top:1px solid rgba(var(--i),.2)">
+<div data-r="" style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(var(--i),.6)">05 · Apa yang ia tidak buat</div>
+<div style="margin-top:36px">
+<div data-no="" style="position:relative;display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:10px 0 14px"><span style="font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(40px,7.4vw,118px);line-height:1;letter-spacing:-.03em">Tiada akaun.</span><span style="font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(var(--i),.6);text-align:right;max-width:220px">Buka dan terus guna</span><span data-noline="" style="position:absolute;left:0;right:0;bottom:0;height:1px;background:rgba(var(--i),.3);transform:scaleX(0);transform-origin:0 50%"></span></div><div data-no="" style="position:relative;display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:10px 0 14px"><span style="font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(40px,7.4vw,118px);line-height:1;letter-spacing:-.03em">Tiada awan.</span><span style="font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(var(--i),.6);text-align:right;max-width:220px">Disimpan dalam telefon ini</span><span data-noline="" style="position:absolute;left:0;right:0;bottom:0;height:1px;background:rgba(var(--i),.3);transform:scaleX(0);transform-origin:0 50%"></span></div><div data-no="" style="position:relative;display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:10px 0 14px"><span style="font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(40px,7.4vw,118px);line-height:1;letter-spacing:-.03em">Tiada iklan.</span><span style="font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(var(--i),.6);text-align:right;max-width:220px">Dibiayai Pro, bukan perhatian anda</span><span data-noline="" style="position:absolute;left:0;right:0;bottom:0;height:1px;background:rgba(var(--i),.3);transform:scaleX(0);transform-origin:0 50%"></span></div><div data-no="" style="position:relative;display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:10px 0 14px"><span style="font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(40px,7.4vw,118px);line-height:1;letter-spacing:-.03em">Tiada AI.</span><span style="font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(var(--i),.6);text-align:right;max-width:220px">Ia berdering. Itu tugasnya</span><span data-noline="" style="position:absolute;left:0;right:0;bottom:0;height:1px;background:rgba(var(--i),.3);transform:scaleX(0);transform-origin:0 50%"></span></div><div data-no="" style="position:relative;display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:10px 0 14px"><span style="font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(40px,7.4vw,118px);line-height:1;letter-spacing:-.03em">Tiada streak.</span><span style="font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(var(--i),.6);text-align:right;max-width:220px">Tiada apa untuk dikejar</span><span data-noline="" style="position:absolute;left:0;right:0;bottom:0;height:1px;background:rgba(var(--i),.3);transform:scaleX(0);transform-origin:0 50%"></span></div><div data-no="" style="position:relative;display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:10px 0 14px"><span style="font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(40px,7.4vw,118px);line-height:1;letter-spacing:-.03em">Tiada apa yang keluar dari peranti.</span><span style="font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(var(--i),.6);text-align:right;max-width:220px"></span><span data-noline="" style="position:absolute;left:0;right:0;bottom:0;height:1px;background:rgba(var(--i),.3);transform:scaleX(0);transform-origin:0 50%"></span></div>
+</div>
+</section>
+
+<section id="pricing" data-sec="06 · Harga" style="position:relative;padding:120px clamp(20px,4vw,56px) 120px clamp(48px,6vw,96px);border-top:1px solid rgba(var(--i),.2);overflow:hidden">
+<div data-pwm="" style="position:absolute;right:-3vw;top:40px;font-family:'Fraunces',serif;font-weight:300;font-size:42vw;line-height:.8;color:rgba(var(--i),.045);pointer-events:none;user-select:none">3</div>
+<div data-r="" style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(var(--i),.6);position:relative">06 · Harga</div>
+<h2 data-r="" style="margin:18px 0 0;font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(36px,5vw,72px);line-height:1.02;letter-spacing:-.02em;max-width:900px;position:relative">Semua yang membuat peringatan berdering kekal percuma.</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:12px;margin-top:48px;position:relative">
+
+<div data-plan="" style="border:1px solid rgba(var(--i),.2);border-radius:2px;padding:24px;background:rgb(var(--p));display:flex;flex-direction:column;gap:18px">
+<div style="display:flex;justify-content:space-between;gap:10px;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase"><span style="color:rgba(var(--i),.6)">Percuma</span></div>
+<div style="display:flex;align-items:baseline;flex-wrap:wrap;gap:8px;font-variant-numeric:tabular-nums"><span style="font-size:clamp(34px,3.4vw,46px);line-height:1">RM0</span><span style="font-size:12px;color:rgba(var(--i),.6)"></span></div>
+<div style="border-top:1px solid rgba(var(--i),.2)"><div style="display:flex;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid rgba(var(--i),.1);font-size:12px;color:rgba(var(--i),.86)"><span style="width:6px;height:6px;background:rgb(var(--i));flex:none"></span>3 peringatan aktif</div><div style="display:flex;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid rgba(var(--i),.1);font-size:12px;color:rgba(var(--i),.86)"><span style="width:6px;height:6px;background:rgb(var(--i));flex:none"></span>Gesa setiap 1 hingga 60 min</div><div style="display:flex;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid rgba(var(--i),.1);font-size:12px;color:rgba(var(--i),.86)"><span style="width:6px;height:6px;background:rgb(var(--i));flex:none"></span>Amaran skrin penuh</div><div style="display:flex;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid rgba(var(--i),.1);font-size:12px;color:rgba(var(--i),.86)"><span style="width:6px;height:6px;background:rgb(var(--i));flex:none"></span>Semakan kebolehpercayaan</div></div>
+<div style="font-size:11px;line-height:1.55;color:rgba(var(--i),.55);margin-top:auto">Semua yang membuat peringatan berdering.</div>
+</div>
+
+<div data-plan="" style="border:1px solid rgba(var(--i),1);border-radius:2px;padding:24px;background:rgb(var(--p));display:flex;flex-direction:column;gap:18px">
+<div style="display:flex;justify-content:space-between;gap:10px;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase"><span style="color:rgba(var(--i),.6)">Tahunan</span><span style="border:1px solid rgba(var(--i),.42);padding:1px 6px;border-radius:2px">Pro</span></div>
+<div style="display:flex;align-items:baseline;flex-wrap:wrap;gap:8px;font-variant-numeric:tabular-nums"><span style="font-size:clamp(34px,3.4vw,46px);line-height:1">RM19.90</span><span style="font-size:12px;color:rgba(var(--i),.6)">/ tahun</span></div>
+<div style="border-top:1px solid rgba(var(--i),.2)"><div style="display:flex;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid rgba(var(--i),.1);font-size:12px;color:rgba(var(--i),.86)"><span style="width:6px;height:6px;background:rgb(var(--i));flex:none"></span>Peringatan tanpa had</div><div style="display:flex;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid rgba(var(--i),.1);font-size:12px;color:rgba(var(--i),.86)"><span style="width:6px;height:6px;background:rgb(var(--i));flex:none"></span>Widget skrin utama</div><div style="display:flex;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid rgba(var(--i),.1);font-size:12px;color:rgba(var(--i),.86)"><span style="width:6px;height:6px;background:rgb(var(--i));flex:none"></span>Sejarah tanpa had</div></div>
+<div style="font-size:11px;line-height:1.55;color:rgba(var(--i),.55);margin-top:auto">Diperbaharui setiap tahun. Batal di Play bila-bila masa.</div>
+</div>
+
+<div data-plan="" style="border:1px solid rgba(var(--i),.2);border-radius:2px;padding:24px;background:rgb(var(--p));display:flex;flex-direction:column;gap:18px">
+<div style="display:flex;justify-content:space-between;gap:10px;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase"><span style="color:rgba(var(--i),.6)">Seumur hidup</span><span style="border:1px solid rgba(var(--i),.42);padding:1px 6px;border-radius:2px">Pro</span></div>
+<div style="display:flex;align-items:baseline;flex-wrap:wrap;gap:8px;font-variant-numeric:tabular-nums"><span style="font-size:clamp(34px,3.4vw,46px);line-height:1">RM49.90</span><span style="font-size:12px;color:rgba(var(--i),.6)">sekali</span></div>
+<div style="border-top:1px solid rgba(var(--i),.2)"><div style="display:flex;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid rgba(var(--i),.1);font-size:12px;color:rgba(var(--i),.86)"><span style="width:6px;height:6px;background:rgb(var(--i));flex:none"></span>Semua dalam Pro</div><div style="display:flex;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid rgba(var(--i),.1);font-size:12px;color:rgba(var(--i),.86)"><span style="width:6px;height:6px;background:rgb(var(--i));flex:none"></span>Bayar sekali</div><div style="display:flex;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid rgba(var(--i),.1);font-size:12px;color:rgba(var(--i),.86)"><span style="width:6px;height:6px;background:rgb(var(--i));flex:none"></span>Dibuka selamanya</div></div>
+<div style="font-size:11px;line-height:1.55;color:rgba(var(--i),.55);margin-top:auto">Satu pembelian, terikat pada akaun Play anda.</div>
+</div>
+
+</div>
+<div style="margin-top:12px;font-size:11px;line-height:1.6;color:rgba(var(--i),.55);position:relative">Harga Malaysia. Google Play memaparkan harga untuk negara anda.</div>
+<div data-r="" style="margin-top:12px;border:1px solid rgba(var(--i),.2);border-radius:2px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(20px,3vw,40px);padding:24px;align-items:center;position:relative;background:rgb(var(--p))">
+<canvas data-bell="" width="368" height="476" style="width:clamp(110px,12vw,160px);height:auto;display:block"></canvas>
+<div><div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase">DIHORMATI SELAMANYA.</div><p style="margin:10px 0 0;font-size:13px;line-height:1.75;color:rgba(var(--i),.86);max-width:680px;text-wrap:pretty">Jika aplikasi ini meninggalkan Play Store atau bertukar tangan, pembelian anda kekal dibuka dalam versi terakhir yang dikeluarkan. Data anda boleh dieksport ke fail biasa dari Tetapan, hari ini dan selamanya. Tiada akaun. Tiada apa yang keluar dari telefon anda kecuali resit yang diperlukan Google Play.</p></div>
+</div>
+</section>
+
+<section data-sec="07 · Tiga bahasa" style="position:relative;padding:100px 0;border-top:1px solid rgba(var(--i),.2);overflow:hidden">
+<div style="padding:0 clamp(20px,4vw,56px) 0 clamp(48px,6vw,96px);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(var(--i),.6)">07 · English · Bahasa Melayu · Bahasa Indonesia</div>
+<div data-mq="" style="display:flex;width:max-content;margin-top:36px;white-space:nowrap">
+<span style="font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(56px,10vw,160px);line-height:1;letter-spacing:-.03em;padding-right:.5em;color:rgba(var(--i),1)">Until it's done.</span><span style="font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(56px,10vw,160px);line-height:1;letter-spacing:-.03em;padding-right:.5em;color:rgba(var(--i),.4)">Sampai siap.</span><span style="font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(56px,10vw,160px);line-height:1;letter-spacing:-.03em;padding-right:.5em;color:rgba(var(--i),.18)">Sampai selesai.</span><span style="font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(56px,10vw,160px);line-height:1;letter-spacing:-.03em;padding-right:.5em;color:rgba(var(--i),1)">Until it's done.</span><span style="font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(56px,10vw,160px);line-height:1;letter-spacing:-.03em;padding-right:.5em;color:rgba(var(--i),.4)">Sampai siap.</span><span style="font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(56px,10vw,160px);line-height:1;letter-spacing:-.03em;padding-right:.5em;color:rgba(var(--i),.18)">Sampai selesai.</span>
+</div>
+</section>
+
+<footer id="get" data-sec="08 · Dapatkan" style="position:relative;padding:140px clamp(20px,4vw,56px) 40px clamp(48px,6vw,96px);border-top:1px solid rgba(var(--i),.2);overflow:hidden">
+<div data-r="" style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(var(--i),.6)">Akan datang di Google Play</div>
+<h2 style="margin:20px 0 0;font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(56px,11vw,190px);line-height:.92;letter-spacing:-.04em;display:flex;flex-wrap:wrap;gap:0 .22em">
+<span style="display:inline-block;overflow:hidden;padding-bottom:.08em"><span data-fw="" style="display:inline-block">Berdering</span></span><span style="display:inline-block;overflow:hidden;padding-bottom:.08em"><span data-fw="" style="display:inline-block">sampai</span></span><span style="display:inline-block;overflow:hidden;padding-bottom:.08em"><span data-fw="" style="display:inline-block">siap.</span></span>
+</h2>
+<div data-r="" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:44px;align-items:center">
+<a href="#get" style="display:inline-flex;align-items:center;gap:14px;height:56px;padding:0 22px;background:rgb(var(--i));color:rgb(var(--p));border-radius:2px;text-decoration:none"><span style="width:10px;height:10px;background:currentColor"></span><span style="display:flex;flex-direction:column;line-height:1.15"><span style="font-size:9px;letter-spacing:.16em">AKAN DATANG DI</span><span style="font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:500">Google Play</span></span></a>
+<span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(var(--i),.6)">Android · Tiada akaun · Tiada apa keluar dari peranti</span>
+</div>
+<div style="margin-top:140px;padding-top:18px;border-top:1px solid rgba(var(--i),.2);display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(var(--i),.55);position:relative;z-index:1">
+<span>© 2026 Sampai</span>
+<div style="display:flex;gap:20px"><a href="../privacy/" style="text-decoration:none;color:rgba(var(--i),.7)">Privasi</a><a href="../terms/" style="text-decoration:none;color:rgba(var(--i),.7)">Terma</a><a href="mailto:sampai.app.support@gmail.com" style="text-decoration:none;color:rgba(var(--i),.7)">Hubungi</a></div>
+</div>
+<div data-fwm="" style="position:absolute;left:clamp(30px,5vw,80px);bottom:-5vw;font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:30vw;line-height:.8;letter-spacing:-.04em;color:rgba(var(--i),.045);pointer-events:none;user-select:none;white-space:nowrap">sampai</div>
+</footer>
+</div>
+<script src="../assets/vendor/lenis.min.js"></script>
+<script src="../assets/vendor/gsap.min.js"></script>
+<script src="../assets/vendor/ScrollTrigger.min.js"></script>
+<script src="../assets/landing.js"></script>
+</body>
+</html>

@@ -2,7 +2,7 @@
 
 The website for **Sampai**, a nag-until-done reminder app for Android: a reminder that rings again every 1, 5, 10, 15, 30 or 60 minutes until you tap Done.
 
-- `/` landing page
+- `/` landing page (English), `/ms/` Malay, `/id/` Indonesian
 - `/privacy/` privacy policy (linked from the Play listing)
 - `/terms/` terms of use
 
@@ -11,3 +11,7 @@ The landing page is ported from the Claude Design file `design/Sampai Landing.dc
 The first, self-designed version of the site is kept on the `v1-own-design` branch.
 
 Contact: sampai.app.support@gmail.com
+
+## Languages
+
+`ms/index.html` and `id/index.html` are generated from `index.html` by `python3 tools/i18n.py`. Edit the English page, add any new line to the table in `tools/i18n.py` (the script stops on untranslated text), then rerun. Malay and Indonesian are written separately, not converted from each other.
