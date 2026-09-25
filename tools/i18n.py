@@ -156,7 +156,7 @@ T = {
     "Contact": ("Hubungi", "Kontak"),
     "In motion": ("Dalam gerakan", "Dalam aksi"),
     "Filmed on a phone.": ("Dirakam pada telefon.", "Direkam di ponsel."),
-    "Three clips · About 70 seconds": ("Tiga klip · Kira-kira 70 saat", "Tiga klip · Sekitar 70 detik"),
+    "Hover to play": ("Halakan tetikus untuk main", "Arahkan kursor untuk memutar"),
     "Setup": ("Persediaan", "Persiapan"),
     "Daily use": ("Kegunaan harian", "Pemakaian harian"),
     "Lock screen": ("Skrin kunci", "Layar kunci"),
