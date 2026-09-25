@@ -56,7 +56,7 @@
   footer > div[style*="margin-top:140px"] { margin-top: 80px !important; }
 }
 </style>
-<style>[data-hint-tap] { display: none; } @keyframes hintpulse { 0%,100% { opacity: 1; transform: translateX(0); } 50% { opacity: .35; transform: translateX(3px); } } [data-pulse] { animation: hintpulse 1.6s ease-in-out infinite; } @media (prefers-reduced-motion: reduce) { [data-pulse] { animation: none; } } @media (hover: none), (pointer: coarse) { [data-hint-hover] { display: none; } [data-hint-tap] { display: inline; } } @media (max-width: 720px) { [data-hint] { display: none !important; } } @media (max-width: 1100px) { [data-clip] figcaption { flex-direction: column; gap: 4px !important; } [data-clip] figcaption > span:last-child { text-align: left !important; } } [data-vwrap] video:focus-visible { outline: 1px solid rgb(var(--i)); outline-offset: 3px; }</style>
+<style>[data-hint-tap] { display: none; } [data-clip] video { transition: opacity .35s ease, filter .35s ease; } [data-clips][data-dim] [data-clip] video:not([data-on]) { opacity: .45; filter: grayscale(.4); } @keyframes hintpulse { 0%,100% { opacity: 1; transform: translateX(0); } 50% { opacity: .35; transform: translateX(3px); } } [data-pulse] { animation: hintpulse 1.6s ease-in-out infinite; } @media (prefers-reduced-motion: reduce) { [data-pulse] { animation: none; } } @media (hover: none), (pointer: coarse) { [data-hint-hover] { display: none; } [data-hint-tap] { display: inline; } } @media (max-width: 720px) { [data-hint] { display: none !important; } } @media (max-width: 1100px) { [data-clip] figcaption { flex-direction: column; gap: 4px !important; } [data-clip] figcaption > span:last-child { text-align: left !important; } } [data-vwrap] video:focus-visible { outline: 1px solid rgb(var(--i)); outline-offset: 3px; }</style>
 </head>
 <body>
 <div data-root="" style="position:relative;font-family:'Space Mono',monospace;color:rgb(var(--i));background:rgb(var(--p))">
@@ -322,10 +322,12 @@
   const hover = matchMedia('(hover: hover) and (pointer: fine)').matches;
   
   if (reduce) { vids.forEach(v => { v.controls = true; v.preload = 'metadata'; }); document.querySelectorAll('[data-hint]').forEach(h => h.remove()); return; }
+  const row = document.querySelector('[data-clips]');
   if (hover) {
+    row.dataset.dim = '';
     // Desktop: one clip at a time, only while pointed at or focused.
-    const play = v => { vids.forEach(o => o !== v && o.pause()); v.preload = 'auto'; v.play().catch(() => {}); };
-    const stop = v => v.pause();
+    const play = v => { vids.forEach(o => { if (o !== v) { o.pause(); delete o.dataset.on; } }); v.dataset.on = ''; v.preload = 'auto'; v.play().catch(() => {}); };
+    const stop = v => { v.pause(); delete v.dataset.on; };
     vids.forEach(v => {
       v.preload = 'metadata';
       v.addEventListener('mouseenter', () => play(v));
@@ -337,12 +339,13 @@
   }
   // Wide touch screens (tablets) show all three side by side: tap to play one.
   if (matchMedia('(min-width: 721px)').matches) {
+    row.dataset.dim = '';
     vids.forEach(v => {
       v.preload = 'metadata';
       v.addEventListener('click', () => {
-        if (!v.paused) { v.pause(); return; }
-        vids.forEach(o => o !== v && o.pause());
-        v.preload = 'auto'; v.play().catch(() => { v.controls = true; });
+        if (!v.paused) { v.pause(); delete v.dataset.on; return; }
+        vids.forEach(o => { if (o !== v) { o.pause(); delete o.dataset.on; } });
+        v.dataset.on = ''; v.preload = 'auto'; v.play().catch(() => { v.controls = true; });
       });
     });
     return;
