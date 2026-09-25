@@ -43,6 +43,11 @@
   [data-track]::-webkit-scrollbar { display: none; }
   [data-track] > div { scroll-snap-align: start; scroll-margin-left: 20px; }
   [data-gal] > div:first-child::after { content: "Swipe \2192"; display: block; margin-top: 12px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: rgba(var(--i), .6); }
+  [data-clips] { display: flex !important; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-left: -20px !important; margin-right: -20px !important; padding: 0 20px; gap: 16px !important; }
+  [data-clips]::-webkit-scrollbar { display: none; }
+  [data-clips] > figure { width: 72vw; scroll-snap-align: start; scroll-margin-left: 20px; }
+  [data-clips] figcaption { flex-direction: column; gap: 4px !important; }
+  [data-clips] figcaption > span:last-child { text-align: left !important; }
   [data-no] { flex-direction: column; align-items: flex-start !important; gap: 6px !important; }
   [data-no] > span:nth-child(2) { text-align: left !important; }
   [data-bell] { width: 90px !important; }
@@ -93,6 +98,25 @@
 <div style="border-top:1px solid rgba(var(--i),.2);border-bottom:1px solid rgba(var(--i),.2);margin-left:clamp(48px,6vw,96px);display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr))">
 <div data-fact="" style="padding:18px 20px 20px 0;border-right:1px solid rgba(var(--i),.1)"><div style="font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(var(--i),.55)">Re-alerts every</div><div style="font-size:clamp(22px,2.4vw,30px);margin-top:10px;font-variant-numeric:tabular-nums">1–60 min</div></div><div data-fact="" style="padding:18px 20px 20px 0;border-right:1px solid rgba(var(--i),.1)"><div style="font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(var(--i),.55)">Account</div><div style="font-size:clamp(22px,2.4vw,30px);margin-top:10px;font-variant-numeric:tabular-nums">None</div></div><div data-fact="" style="padding:18px 20px 20px 0;border-right:1px solid rgba(var(--i),.1)"><div style="font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(var(--i),.55)">Data</div><div style="font-size:clamp(22px,2.4vw,30px);margin-top:10px;font-variant-numeric:tabular-nums">On device</div></div><div data-fact="" style="padding:18px 20px 20px 0;border-right:1px solid rgba(var(--i),.1)"><div style="font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(var(--i),.55)">Free tier</div><div style="font-size:clamp(22px,2.4vw,30px);margin-top:10px;font-variant-numeric:tabular-nums">3 active</div></div>
 </div>
+
+<section id="film" data-sec="In motion" style="position:relative;padding:110px clamp(20px,4vw,56px) 110px clamp(48px,6vw,96px)">
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap">
+<h2 data-r="" style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(36px,5vw,72px);line-height:1.02;letter-spacing:-.02em">Filmed on a phone.</h2>
+<span data-r="" style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(var(--i),.6)">Three clips · About 70 seconds</span>
+</div>
+<div data-clips="" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2.4vw,36px);margin-top:44px">
+<figure data-clip="" style="margin:0;flex:none;display:flex;flex-direction:column;gap:12px">
+<video src="assets/video/01-setup.mp4" poster="assets/video/01-setup.jpg" muted loop playsinline preload="none" aria-label="Setup: Four permissions, one test ring." style="display:block;width:100%;aspect-ratio:9/16;height:auto;border:1px solid rgba(var(--i),.2);border-radius:2px;background:rgb(var(--p))"></video>
+<figcaption style="display:flex;justify-content:space-between;gap:12px;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase"><span><span style="color:rgba(var(--i),.45)">01</span> · Setup</span><span style="color:rgba(var(--i),.55);text-align:right">Four permissions, one test ring.</span></figcaption>
+</figure><figure data-clip="" style="margin:0;flex:none;display:flex;flex-direction:column;gap:12px">
+<video src="assets/video/02-daily.mp4" poster="assets/video/02-daily.jpg" muted loop playsinline preload="none" aria-label="Daily use: Title, a time, Save." style="display:block;width:100%;aspect-ratio:9/16;height:auto;border:1px solid rgba(var(--i),.2);border-radius:2px;background:rgb(var(--p))"></video>
+<figcaption style="display:flex;justify-content:space-between;gap:12px;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase"><span><span style="color:rgba(var(--i),.45)">02</span> · Daily use</span><span style="color:rgba(var(--i),.55);text-align:right">Title, a time, Save.</span></figcaption>
+</figure><figure data-clip="" style="margin:0;flex:none;display:flex;flex-direction:column;gap:12px">
+<video src="assets/video/03-lockscreen.mp4" poster="assets/video/03-lockscreen.jpg" muted loop playsinline preload="none" aria-label="Lock screen: Ignored? It rings again." style="display:block;width:100%;aspect-ratio:9/16;height:auto;border:1px solid rgba(var(--i),.2);border-radius:2px;background:rgb(var(--p))"></video>
+<figcaption style="display:flex;justify-content:space-between;gap:12px;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase"><span><span style="color:rgba(var(--i),.45)">03</span> · Lock screen</span><span style="color:rgba(var(--i),.55);text-align:right">Ignored? It rings again.</span></figcaption>
+</figure>
+</div>
+</section>
 
 <section id="nag" data-nag="" data-sec="01 · The nag" style="position:relative;height:100vh;padding:80px clamp(20px,4vw,56px) 40px clamp(48px,6vw,96px);box-sizing:border-box;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:40px;align-items:center;overflow:hidden">
 <div>
@@ -290,5 +314,18 @@
 <script src="assets/vendor/gsap.min.js"></script>
 <script src="assets/vendor/ScrollTrigger.min.js"></script>
 <script src="assets/landing.js"></script>
+<script>
+(() => {
+  const vids = [...document.querySelectorAll('[data-clip] video')];
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce || !('IntersectionObserver' in window)) { vids.forEach(v => { v.controls = true; v.preload = 'metadata'; }); return; }
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    const v = e.target;
+    if (e.isIntersecting) { v.preload = 'auto'; v.play().catch(() => { v.controls = true; }); } else v.pause();
+  }), { threshold: 0.4 });
+  vids.forEach(v => io.observe(v));
+})();
+</script>
+
 </body>
 </html>

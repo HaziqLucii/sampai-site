@@ -154,6 +154,18 @@ T = {
     "Privacy": ("Privasi", "Privasi"),
     "Terms": ("Terma", "Ketentuan"),
     "Contact": ("Hubungi", "Kontak"),
+    "In motion": ("Dalam gerakan", "Dalam aksi"),
+    "Filmed on a phone.": ("Dirakam pada telefon.", "Direkam di ponsel."),
+    "Three clips · About 70 seconds": ("Tiga klip · Kira-kira 70 saat", "Tiga klip · Sekitar 70 detik"),
+    "Setup": ("Persediaan", "Persiapan"),
+    "Daily use": ("Kegunaan harian", "Pemakaian harian"),
+    "Lock screen": ("Skrin kunci", "Layar kunci"),
+    "· Setup": ("· Persediaan", "· Persiapan"),
+    "· Daily use": ("· Kegunaan harian", "· Pemakaian harian"),
+    "· Lock screen": ("· Skrin kunci", "· Layar kunci"),
+    "Four permissions, one test ring.": ("Empat kebenaran, satu deringan ujian.", "Empat izin, satu dering uji."),
+    "Title, a time, Save.": ("Tajuk, masa, Simpan.", "Judul, waktu, Simpan."),
+    "Ignored? It rings again.": ("Diabaikan? Ia berdering lagi.", "Diabaikan? Berbunyi lagi."),
     # Side-label section names (data-sec) and image alt text.
     "04 · Every screen": ("04 · Setiap skrin", "04 · Setiap layar"),
     "07 · Three languages": ("07 · Tiga bahasa", "07 · Tiga bahasa"),
@@ -243,6 +255,9 @@ def build(lang, idx):
         name, value = m.group(1), m.group(2)
         text = html.unescape(value)
         if name == 'data-sec' or name == 'alt' or name == 'aria-label':
+            if name == 'aria-label' and ': ' in text:
+                a, b = text.split(': ', 1)
+                return f'{name}="{html.escape(lookup(a, idx) + ": " + lookup(b, idx))}"'
             if name == 'alt' and ' screen. ' in text:
                 title, desc = text.split(' screen. ', 1)
                 t = lookup(title, idx)
@@ -253,7 +268,7 @@ def build(lang, idx):
 
     body_html = re.sub(r'\b(data-sec|alt|aria-label)="([^"]*)"', attr, body_html)
     body_html = body_html.replace('href="privacy/"', 'href="../privacy/"').replace('href="terms/"', 'href="../terms/"')
-    body_html = body_html.replace('src="assets/', 'src="../assets/')
+    body_html = body_html.replace('src="assets/', 'src="../assets/').replace('poster="assets/', 'poster="../assets/')
     scripts = scripts.replace('"assets/', '"../assets/')
 
     meta = META[lang]
