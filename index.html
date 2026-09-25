@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,214 +7,280 @@
 <meta name="description" content="Sampai is a nag-until-done reminder app for Android. It rings again every 1, 5, 10, 15, 30 or 60 minutes until you tap Done. Offline, no account, no ads.">
 <meta property="og:title" content="Sampai: reminders that ring until done">
 <meta property="og:description" content="A reminder that keeps ringing until you tap Done. For Android. Offline, no account, no ads.">
-<meta property="og:image" content="assets/screens/03-alert.jpg">
+<meta property="og:image" content="assets/screens/03-alert-4.jpg">
 <meta name="theme-color" content="#0b0a09">
 <link rel="icon" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..400;1,9..144,300&family=Space+Grotesk:wght@400;500&family=Space+Mono&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..500;1,9..144,300..500&family=Space+Grotesk:wght@400;500;600&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"><style>:root{--p:11,10,9;--i:205,196,186}html,body{margin:0;background:rgb(var(--p));color:rgb(var(--i));-webkit-font-smoothing:antialiased;overflow-x:hidden}html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!important}body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opacity:.07;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 1.4 -.3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}a{color:rgb(var(--i))}a:hover{color:rgba(var(--i),.7)}::selection{background:rgb(var(--i));color:rgb(var(--p))}</style>
+<style>
+/* Phone layout: the design is drawn for desktop, so these override its inline spacing. */
+@media (max-width: 720px) {
+  [data-label] { display: none !important; }
+  [data-nav] > div { padding: 0 20px !important; height: 56px !important; }
+  [data-nav] a[href="#top"] > span + span { display: none; }
+  [data-nav] a[href="#nag"], [data-nav] a[href="#reliable"], [data-nav] a[href="#pricing"] { display: none; }
+  #top, section, footer { padding-left: 20px !important; padding-right: 20px !important; }
+  #top { padding-top: 96px !important; min-height: auto !important; gap: 40px !important; }
+  #top + div { margin-left: 20px !important; }
+  [data-nag] { height: auto !important; min-height: 100vh; padding-top: 72px !important; padding-bottom: 40px !important; gap: 20px !important; align-content: center; }
+  [data-nag] h2 { font-size: 34px !important; }
+  [data-nag] > div:last-child { min-height: 0 !important; }
+  [data-nag] [data-nn] { font-size: 150px !important; }
+  [data-nag] > div:last-child > div:first-child { height: 130px !important; }
+  [data-nag] > div:last-child > div:last-child { margin-top: 24px !important; }
+  [data-ndone] > span:first-child { width: 64px !important; height: 64px !important; }
+  [data-ndone] > span:last-child { font-size: 22px !important; }
+  section, footer { padding-top: 88px !important; padding-bottom: 88px !important; }
+  [data-gal] { padding: 0 !important; }
+  [data-gal] > div:first-child, [data-track] { padding-left: 20px !important; padding-right: 20px !important; }
+  [data-track] { gap: 20px !important; }
+  [data-no] { flex-direction: column; align-items: flex-start !important; gap: 6px !important; }
+  [data-no] > span:nth-child(2) { text-align: left !important; }
+  [data-bell] { width: 90px !important; }
+  section[data-sec^="07"] { padding-left: 0 !important; padding-right: 0 !important; }
+  section[data-sec^="07"] > div:first-child { padding-left: 20px !important; padding-right: 20px !important; }
+  footer > div[style*="margin-top:140px"] { margin-top: 80px !important; }
+}
+</style>
 </head>
 <body>
-<div class="margin-text" aria-hidden="true">Sampai · Until it's done · Android</div>
-<div class="progress" aria-hidden="true"><span></span></div>
+<div data-root="" style="position:relative;font-family:'Space Mono',monospace;color:rgb(var(--i));background:rgb(var(--p))">
 
-<div class="wrap">
-  <header class="top">
-    <a class="mark" href="./">Sampai</a>
-    <nav class="label"><a href="#pricing">Pro</a><a href="privacy/">Privacy</a><a href="terms/">Terms</a></nav>
-  </header>
-  <hr class="rule line">
+<div data-prog="" style="position:fixed;top:0;left:0;right:0;height:1px;background:rgb(var(--i));transform:scaleX(0);transform-origin:0 50%;z-index:80"></div>
+<div data-label="" style="position:fixed;left:16px;top:50%;transform:translateY(-50%) rotate(180deg);writing-mode:vertical-rl;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:rgba(var(--i),.45);z-index:70;white-space:nowrap;pointer-events:none">00 · Filed · 25.09.2026</div>
 
-  <section class="hero">
-    <div class="watermark" aria-hidden="true">S.</div>
-    <div>
-      <div class="label intro">Android · Offline · No account</div>
-      <h1 class="wordmark">Sampai</h1>
-      <p class="tagline intro">Reminders that ring again until you tap Done.</p>
-      <p class="lead intro">Pick a time and how often it should nag: every 1, 5, 10, 15, 30 or 60 minutes. It keeps coming back, on the lock screen if it has to, until the thing is actually done.</p>
-      <div class="cta intro">
-        <span class="btn ghost">Coming soon to Google Play</span>
-        <a class="scroll-cue label" href="#nag">Scroll · watch it nag</a>
-      </div>
-    </div>
-    <figure class="plate hero-plate">
-      <div class="frame ringer"><img src="assets/screens/03-alert.jpg" width="720" height="1600" alt="Sampai's full-screen alert on the lock screen: a large numeral 1, the reminder Pay TNB electricity bill, and Done, Snooze and Reschedule buttons."></div>
-      <figcaption class="label"><span>Plate 01 · Lock screen</span><span>Alert <b class="ticker">01</b></span></figcaption>
-    </figure>
-  </section>
+<nav data-nav="" style="position:fixed;top:0;left:0;right:0;z-index:75;background:rgb(var(--p));border-bottom:1px solid rgba(var(--i),.2)">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:20px;height:60px;padding:0 clamp(20px,4vw,56px) 0 clamp(48px,6vw,96px)">
+<a href="#top" style="display:flex;align-items:baseline;gap:12px;text-decoration:none"><span style="font-size:12px;letter-spacing:.18em;font-weight:700">SAMPAI</span><span style="font-size:10.5px;color:rgba(var(--i),.5)">Until it's done.</span></a>
+<div style="display:flex;align-items:center;gap:clamp(14px,2.4vw,32px);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase">
+<a href="#nag" style="text-decoration:none;color:rgba(var(--i),.7)">How it nags</a>
+<a href="#reliable" style="text-decoration:none;color:rgba(var(--i),.7)">Reliability</a>
+<a href="#pricing" style="text-decoration:none;color:rgba(var(--i),.7)">Pricing</a>
+<a href="#get" style="height:34px;padding:0 14px;display:flex;align-items:center;border:1px solid rgba(var(--i),.42);border-radius:2px;text-decoration:none">Coming soon</a>
+</div>
+</div>
+</nav>
+
+<header id="top" data-hero="" data-sec="00 · Filed · 25.09.2026" style="position:relative;min-height:100vh;padding:120px clamp(20px,4vw,56px) 56px clamp(48px,6vw,96px);box-sizing:border-box;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:48px;align-items:center;overflow:hidden">
+<div style="position:relative;z-index:2">
+<div data-hf="" style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(var(--i),.6)">Android reminders · Offline · EN / MS / ID</div>
+<h1 data-hword="" aria-label="Sampai" style="margin:28px 0 0;font-family:'Fraunces',serif;font-weight:350;font-size:clamp(96px,17vw,264px);line-height:.86;letter-spacing:-.035em;display:flex">
+<span style="display:inline-block;overflow:hidden;padding-bottom:.14em"><span data-hl="" style="display:inline-block">S</span></span><span style="display:inline-block;overflow:hidden;padding-bottom:.14em"><span data-hl="" style="display:inline-block">a</span></span><span style="display:inline-block;overflow:hidden;padding-bottom:.14em"><span data-hl="" style="display:inline-block">m</span></span><span style="display:inline-block;overflow:hidden;padding-bottom:.14em"><span data-hl="" style="display:inline-block">p</span></span><span style="display:inline-block;overflow:hidden;padding-bottom:.14em"><span data-hl="" style="display:inline-block">a</span></span><span style="display:inline-block;overflow:hidden;padding-bottom:.14em"><span data-hl="" style="display:inline-block">i</span></span>
+</h1>
+<p data-hf="" style="margin:18px 0 0;font-family:'Space Grotesk',sans-serif;font-size:clamp(22px,2.4vw,32px);line-height:1.2;font-weight:400;max-width:520px;text-wrap:pretty">Reminders that ring again until you tap Done.</p>
+<p data-hf="" style="margin:18px 0 0;font-size:13px;line-height:1.75;color:rgba(var(--i),.7);max-width:460px;text-wrap:pretty">Sampai is Malay and Indonesian for "until". Free for three active reminders. No account, no cloud, no ads.</p>
+<div data-hf="" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:32px;align-items:center">
+<a href="#get" style="display:inline-flex;align-items:center;gap:14px;height:56px;padding:0 22px;background:rgb(var(--i));color:rgb(var(--p));border-radius:2px;text-decoration:none"><span style="width:10px;height:10px;background:currentColor"></span><span style="display:flex;flex-direction:column;line-height:1.15"><span style="font-size:9px;letter-spacing:.16em">COMING SOON TO</span><span style="font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:500">Google Play</span></span></a>
+<a href="#nag" style="height:56px;padding:0 20px;display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(var(--i),.42);border-radius:2px;text-decoration:none;font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:500">See how it nags <span style="font-family:'Space Mono',monospace">↓</span></a>
+</div>
+</div>
+<div data-hpar="" style="position:relative;z-index:1;justify-self:center"><div data-hphone="" style="display:flex;flex-direction:column;gap:12px">
+<div style="width:280px;height:622px;overflow:hidden;border:1px solid rgba(var(--i),.42);border-radius:2px;position:relative"><img src="assets/screens/03-alert-4.jpg" width="280" height="622" alt="Sampai alert on the lock screen: a large numeral 4, the reminder Call Mak about Sunday lunch, and Done, Snooze and Reschedule buttons." style="display:block;width:100%;height:100%;object-fit:cover"></div>
+<div style="display:flex;justify-content:space-between;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(var(--i),.5)"><span>Fig. 1</span><span>Alert 4 · Lock screen</span></div>
+</div></div>
+<div data-hwm="" style="position:absolute;right:-4vw;bottom:-8vw;font-family:'Fraunces',serif;font-weight:300;font-size:46vw;line-height:.8;letter-spacing:-.06em;color:rgba(var(--i),.045);pointer-events:none;user-select:none;z-index:0">4</div>
+</header>
+
+<div style="border-top:1px solid rgba(var(--i),.2);border-bottom:1px solid rgba(var(--i),.2);margin-left:clamp(48px,6vw,96px);display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr))">
+<div data-fact="" style="padding:18px 20px 20px 0;border-right:1px solid rgba(var(--i),.1)"><div style="font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(var(--i),.55)">Re-alerts every</div><div style="font-size:clamp(22px,2.4vw,30px);margin-top:10px;font-variant-numeric:tabular-nums">1–60 min</div></div><div data-fact="" style="padding:18px 20px 20px 0;border-right:1px solid rgba(var(--i),.1)"><div style="font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(var(--i),.55)">Account</div><div style="font-size:clamp(22px,2.4vw,30px);margin-top:10px;font-variant-numeric:tabular-nums">None</div></div><div data-fact="" style="padding:18px 20px 20px 0;border-right:1px solid rgba(var(--i),.1)"><div style="font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(var(--i),.55)">Data</div><div style="font-size:clamp(22px,2.4vw,30px);margin-top:10px;font-variant-numeric:tabular-nums">On device</div></div><div data-fact="" style="padding:18px 20px 20px 0;border-right:1px solid rgba(var(--i),.1)"><div style="font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(var(--i),.55)">Free tier</div><div style="font-size:clamp(22px,2.4vw,30px);margin-top:10px;font-variant-numeric:tabular-nums">3 active</div></div>
 </div>
 
-<div class="marquee" aria-hidden="true">
-  <div class="marquee-track">
-    <span>Rings again</span><span>·</span><span>Until it's done</span><span>·</span><span>Sampai siap</span><span>·</span><span>Every 10 min</span><span>·</span><span>No account</span><span>·</span><span>No ads</span><span>·</span><span>Offline</span><span>·</span>
-    <span>Rings again</span><span>·</span><span>Until it's done</span><span>·</span><span>Sampai siap</span><span>·</span><span>Every 10 min</span><span>·</span><span>No account</span><span>·</span><span>No ads</span><span>·</span><span>Offline</span><span>·</span>
-  </div>
+<section id="nag" data-nag="" data-sec="01 · The nag" style="position:relative;height:100vh;padding:80px clamp(20px,4vw,56px) 40px clamp(48px,6vw,96px);box-sizing:border-box;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:40px;align-items:center;overflow:hidden">
+<div>
+<div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(var(--i),.6)">01 · The nag</div>
+<h2 style="margin:18px 0 0;font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(36px,5vw,72px);line-height:1.02;letter-spacing:-.02em;max-width:560px">It rings. Then it rings again.</h2>
+<p style="margin:22px 0 0;font-size:13.5px;line-height:1.75;color:rgba(var(--i),.8);max-width:440px;text-wrap:pretty">A reminder fires at its time, then re-alerts every 1, 5, 10, 15, 30 or 60 minutes until you tap Done or reschedule it. It never looks anxious about it.</p>
+<div style="margin-top:32px;max-width:440px">
+<div style="position:relative;height:1px;background:rgba(var(--i),.2)"><div data-nline="" style="position:absolute;inset:0;background:rgb(var(--i));transform:scaleX(0);transform-origin:0 50%"></div></div>
+<div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin-top:12px">
+<div style="display:flex;flex-direction:column;gap:8px"><span style="position:relative;width:10px;height:10px;border:1px solid rgb(var(--i));box-sizing:border-box"><span data-nt="" style="position:absolute;inset:1px;background:rgb(var(--i));opacity:1"></span></span><span style="font-size:10px;letter-spacing:.08em;color:rgba(var(--i),.6);font-variant-numeric:tabular-nums">09:00</span></div><div style="display:flex;flex-direction:column;gap:8px"><span style="position:relative;width:10px;height:10px;border:1px solid rgb(var(--i));box-sizing:border-box"><span data-nt="" style="position:absolute;inset:1px;background:rgb(var(--i));opacity:0"></span></span><span style="font-size:10px;letter-spacing:.08em;color:rgba(var(--i),.6);font-variant-numeric:tabular-nums">09:10</span></div><div style="display:flex;flex-direction:column;gap:8px"><span style="position:relative;width:10px;height:10px;border:1px solid rgb(var(--i));box-sizing:border-box"><span data-nt="" style="position:absolute;inset:1px;background:rgb(var(--i));opacity:0"></span></span><span style="font-size:10px;letter-spacing:.08em;color:rgba(var(--i),.6);font-variant-numeric:tabular-nums">09:20</span></div><div style="display:flex;flex-direction:column;gap:8px"><span style="position:relative;width:10px;height:10px;border:1px solid rgb(var(--i));box-sizing:border-box"><span data-nt="" style="position:absolute;inset:1px;background:rgb(var(--i));opacity:0"></span></span><span style="font-size:10px;letter-spacing:.08em;color:rgba(var(--i),.6);font-variant-numeric:tabular-nums">09:30</span></div><div style="display:flex;flex-direction:column;gap:8px"><span style="position:relative;width:10px;height:10px;border:1px solid rgb(var(--i));box-sizing:border-box"><span data-nt="" style="position:absolute;inset:1px;background:rgb(var(--i));opacity:0"></span></span><span style="font-size:10px;letter-spacing:.08em;color:rgba(var(--i),.6);font-variant-numeric:tabular-nums">Done</span></div>
+</div>
+</div>
+</div>
+<div style="position:relative;min-height:min(62vh,520px);display:flex;flex-direction:column;justify-content:center">
+<div style="position:relative;height:clamp(170px,26vw,380px)">
+<div data-nn="" style="position:absolute;left:0;bottom:0;font-family:'Fraunces',serif;font-weight:300;font-size:clamp(210px,32vw,470px);line-height:.8;letter-spacing:-.05em;font-variant-numeric:tabular-nums;opacity:1">1</div><div data-nn="" style="position:absolute;left:0;bottom:0;font-family:'Fraunces',serif;font-weight:300;font-size:clamp(210px,32vw,470px);line-height:.8;letter-spacing:-.05em;font-variant-numeric:tabular-nums;opacity:0">2</div><div data-nn="" style="position:absolute;left:0;bottom:0;font-family:'Fraunces',serif;font-weight:300;font-size:clamp(210px,32vw,470px);line-height:.8;letter-spacing:-.05em;font-variant-numeric:tabular-nums;opacity:0">3</div><div data-nn="" style="position:absolute;left:0;bottom:0;font-family:'Fraunces',serif;font-weight:300;font-size:clamp(210px,32vw,470px);line-height:.8;letter-spacing:-.05em;font-variant-numeric:tabular-nums;opacity:0">4</div>
+<div data-ndone="" style="position:absolute;left:0;bottom:0;opacity:0;display:flex;flex-direction:column;gap:22px"><span style="width:clamp(90px,12vw,160px);height:clamp(90px,12vw,160px);background:rgb(var(--i))"></span><span style="font-family:'Space Grotesk',sans-serif;font-size:clamp(26px,3vw,40px);font-weight:500;line-height:1.1">Done after 4 alerts.<br>Filed.</span></div>
+</div>
+<div style="position:relative;height:20px;margin-top:56px">
+<div data-nc="" style="position:absolute;left:0;top:0;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-variant-numeric:tabular-nums;opacity:1">Alert 1 · 09:00 · Every 10 min</div><div data-nc="" style="position:absolute;left:0;top:0;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-variant-numeric:tabular-nums;opacity:0">Alert 2 · 09:10 · Every 10 min</div><div data-nc="" style="position:absolute;left:0;top:0;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-variant-numeric:tabular-nums;opacity:0">Alert 3 · 09:20 · Every 10 min</div><div data-nc="" style="position:absolute;left:0;top:0;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-variant-numeric:tabular-nums;opacity:0">Alert 4 · 09:30 · Every 10 min</div>
+</div>
+</div>
+</section>
+
+<section data-sec="02 · Five seconds" style="position:relative;padding:120px clamp(20px,4vw,56px) 120px clamp(48px,6vw,96px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:56px;align-items:center;border-top:1px solid rgba(var(--i),.2)">
+<div data-cphone="" style="justify-self:center;display:flex;flex-direction:column;gap:12px">
+<div style="width:280px;height:622px;overflow:hidden;border:1px solid rgba(var(--i),.42);border-radius:2px;position:relative"><img src="assets/screens/02-create.jpg" width="280" height="622" alt="The new reminder sheet with time chips, nag interval chips from 1 to 60 minutes and a Save button." style="display:block;width:100%;height:100%;object-fit:cover"></div>
+<div style="display:flex;justify-content:space-between;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(var(--i),.5)"><span>Fig. 2</span><span>Create · keyboard up</span></div>
+</div>
+<div>
+<div data-r="" style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(var(--i),.6)">02 · Five seconds</div>
+<h2 data-r="" style="margin:18px 0 0;font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(36px,5vw,72px);line-height:1.02;letter-spacing:-.02em">Title, one chip, Save.</h2>
+<p data-r="" style="margin:22px 0 0;font-size:13.5px;line-height:1.75;color:rgba(var(--i),.8);max-width:460px;text-wrap:pretty">The sheet opens with the keyboard already up. Everything you need sits in thumb reach, so a reminder takes under five seconds to set.</p>
+<div style="margin-top:36px;border-top:1px solid rgba(var(--i),.2);max-width:500px">
+<div data-step="" style="display:grid;grid-template-columns:56px minmax(0,1fr);gap:16px;padding:20px 0;border-bottom:1px solid rgba(var(--i),.2)"><span style="font-size:28px;line-height:1;font-variant-numeric:tabular-nums;color:rgba(var(--i),.4)">01</span><div><div style="font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:500">Type the title</div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px"></div></div></div><div data-step="" style="display:grid;grid-template-columns:56px minmax(0,1fr);gap:16px;padding:20px 0;border-bottom:1px solid rgba(var(--i),.2)"><span style="font-size:28px;line-height:1;font-variant-numeric:tabular-nums;color:rgba(var(--i),.4)">02</span><div><div style="font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:500">Tap a time chip</div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px"><span data-chip="" style="height:30px;padding:0 10px;display:flex;align-items:center;border:1px solid rgba(var(--i),.2);border-radius:2px;font-size:11px;color:rgba(var(--i),.86);white-space:nowrap">In 30 min</span><span data-chip="" style="height:30px;padding:0 10px;display:flex;align-items:center;border:1px solid rgba(var(--i),.2);border-radius:2px;font-size:11px;color:rgba(var(--i),.86);white-space:nowrap">In 1 h</span><span data-chip="" style="height:30px;padding:0 10px;display:flex;align-items:center;border:1px solid rgba(var(--i),.2);border-radius:2px;font-size:11px;color:rgba(var(--i),.86);white-space:nowrap">Tonight 8pm</span><span data-chip="" style="height:30px;padding:0 10px;display:flex;align-items:center;border:1px solid rgba(var(--i),.2);border-radius:2px;font-size:11px;color:rgba(var(--i),.86);white-space:nowrap">Tomorrow 9am</span></div></div></div><div data-step="" style="display:grid;grid-template-columns:56px minmax(0,1fr);gap:16px;padding:20px 0;border-bottom:1px solid rgba(var(--i),.2)"><span style="font-size:28px;line-height:1;font-variant-numeric:tabular-nums;color:rgba(var(--i),.4)">03</span><div><div style="font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:500">Pick the nag, Save</div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px"><span data-chip="" style="height:30px;padding:0 10px;display:flex;align-items:center;border:1px solid rgba(var(--i),.2);border-radius:2px;font-size:11px;color:rgba(var(--i),.86);white-space:nowrap">1</span><span data-chip="" style="height:30px;padding:0 10px;display:flex;align-items:center;border:1px solid rgba(var(--i),.2);border-radius:2px;font-size:11px;color:rgba(var(--i),.86);white-space:nowrap">5</span><span data-chip="" style="height:30px;padding:0 10px;display:flex;align-items:center;border:1px solid rgba(var(--i),.2);border-radius:2px;font-size:11px;color:rgba(var(--i),.86);white-space:nowrap">10</span><span data-chip="" style="height:30px;padding:0 10px;display:flex;align-items:center;border:1px solid rgba(var(--i),.2);border-radius:2px;font-size:11px;color:rgba(var(--i),.86);white-space:nowrap">15</span><span data-chip="" style="height:30px;padding:0 10px;display:flex;align-items:center;border:1px solid rgba(var(--i),.2);border-radius:2px;font-size:11px;color:rgba(var(--i),.86);white-space:nowrap">30</span><span data-chip="" style="height:30px;padding:0 10px;display:flex;align-items:center;border:1px solid rgba(var(--i),.2);border-radius:2px;font-size:11px;color:rgba(var(--i),.86);white-space:nowrap">60 min</span></div></div></div>
+</div>
+</div>
+</section>
+
+<section id="reliable" data-rel="" data-sec="03 · Reliability" style="position:relative;padding:120px clamp(20px,4vw,56px) 120px clamp(48px,6vw,96px);border-top:1px solid rgba(var(--i),.2);overflow:hidden">
+<div data-r="" style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(var(--i),.6)">03 · Reliability</div>
+<h2 data-r="" style="margin:18px 0 0;font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(36px,5vw,72px);line-height:1.02;letter-spacing:-.02em;max-width:820px">9:00 means 9:00, not 9:07.</h2>
+<p data-r="" style="margin:22px 0 0;font-size:13.5px;line-height:1.75;color:rgba(var(--i),.8);max-width:560px;text-wrap:pretty">Android puts apps to sleep to save battery, and reminders go quiet. Sampai walks you through the four permissions that keep it awake, checks the settings your phone brand is known to break, then rings you to prove it works.</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:48px;margin-top:48px;align-items:end">
+<div style="border-top:1px solid rgba(var(--i),.2)">
+
+<div data-perm="" style="display:grid;grid-template-columns:22px minmax(0,1fr) 76px;gap:12px;padding:18px 0;border-bottom:1px solid rgba(var(--i),.2);align-items:start">
+<span style="position:relative;width:12px;height:12px;border:1px solid rgb(var(--i));box-sizing:border-box;margin-top:2px"><span data-pf="" style="position:absolute;inset:1px;background:rgb(var(--i));transform:scale(0)"></span></span>
+<div><div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase">Notifications</div><div style="font-size:12.5px;line-height:1.6;color:rgba(var(--i),.75);margin-top:6px;text-wrap:pretty">So it can ring at all.</div></div>
+<span style="position:relative;height:16px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;text-align:right"><span data-poff="" style="position:absolute;right:0;top:0;color:rgba(var(--i),.5);white-space:nowrap">Not set</span><span data-pon="" style="position:absolute;right:0;top:0;opacity:0">OK</span></span>
 </div>
 
-<section class="nag" id="nag">
-  <div class="wrap nag-inner">
-    <div class="nag-count">
-      <div class="label"><span class="sec-num">01</span> · Ringing</div>
-      <div class="numeral" aria-hidden="true"><span class="num">1</span></div>
-      <div class="nag-caption label">Alert <b class="n2">01</b> · <b class="clock">12:20</b> · Every 10 min</div>
-      <div class="done-stamp" aria-hidden="true"><span>Done</span><i></i></div>
-    </div>
-    <div class="nag-copy">
-      <h2 class="split">It nags until it's done.</h2>
-      <p>A normal reminder fires once and is gone the moment you swipe it away. Sampai comes back. It rings again at the interval you chose and counts every alert, so you can see how many times you have been told.</p>
-      <div class="chips" aria-label="Nag intervals in minutes">
-        <span class="chip">1</span><span class="chip">5</span><span class="chip on">10</span><span class="chip">15</span><span class="chip">30</span><span class="chip">60</span>
-      </div>
-      <p class="label" style="margin-bottom:22px">Nag every · minutes</p>
-      <p>Snooze for ten minutes if you need to. Done is the only way to make it stop.</p>
-      <div class="nag-bar" aria-hidden="true"><span></span></div>
-    </div>
-  </div>
+<div data-perm="" style="display:grid;grid-template-columns:22px minmax(0,1fr) 76px;gap:12px;padding:18px 0;border-bottom:1px solid rgba(var(--i),.2);align-items:start">
+<span style="position:relative;width:12px;height:12px;border:1px solid rgb(var(--i));box-sizing:border-box;margin-top:2px"><span data-pf="" style="position:absolute;inset:1px;background:rgb(var(--i));transform:scale(0)"></span></span>
+<div><div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase">Alarms &amp; reminders</div><div style="font-size:12.5px;line-height:1.6;color:rgba(var(--i),.75);margin-top:6px;text-wrap:pretty">So 9:00 means 9:00, not 9:07.</div></div>
+<span style="position:relative;height:16px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;text-align:right"><span data-poff="" style="position:absolute;right:0;top:0;color:rgba(var(--i),.5);white-space:nowrap">Not set</span><span data-pon="" style="position:absolute;right:0;top:0;opacity:0">OK</span></span>
+</div>
+
+<div data-perm="" style="display:grid;grid-template-columns:22px minmax(0,1fr) 76px;gap:12px;padding:18px 0;border-bottom:1px solid rgba(var(--i),.2);align-items:start">
+<span style="position:relative;width:12px;height:12px;border:1px solid rgb(var(--i));box-sizing:border-box;margin-top:2px"><span data-pf="" style="position:absolute;inset:1px;background:rgb(var(--i));transform:scale(0)"></span></span>
+<div><div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase">Full-screen alerts</div><div style="font-size:12.5px;line-height:1.6;color:rgba(var(--i),.75);margin-top:6px;text-wrap:pretty">So it can take over the lock screen like an alarm clock.</div></div>
+<span style="position:relative;height:16px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;text-align:right"><span data-poff="" style="position:absolute;right:0;top:0;color:rgba(var(--i),.5);white-space:nowrap">Not set</span><span data-pon="" style="position:absolute;right:0;top:0;opacity:0">OK</span></span>
+</div>
+
+<div data-perm="" style="display:grid;grid-template-columns:22px minmax(0,1fr) 76px;gap:12px;padding:18px 0;border-bottom:1px solid rgba(var(--i),.2);align-items:start">
+<span style="position:relative;width:12px;height:12px;border:1px solid rgb(var(--i));box-sizing:border-box;margin-top:2px"><span data-pf="" style="position:absolute;inset:1px;background:rgb(var(--i));transform:scale(0)"></span></span>
+<div><div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase">Battery, unrestricted</div><div style="font-size:12.5px;line-height:1.6;color:rgba(var(--i),.75);margin-top:6px;text-wrap:pretty">So Android does not put it to sleep. This is the one most phones break.</div></div>
+<span style="position:relative;height:16px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;text-align:right"><span data-poff="" style="position:absolute;right:0;top:0;color:rgba(var(--i),.5);white-space:nowrap">Not set</span><span data-pon="" style="position:absolute;right:0;top:0;opacity:0">OK</span></span>
+</div>
+
+<div data-perm="" style="display:grid;grid-template-columns:22px minmax(0,1fr);gap:12px;padding:18px 0;border-bottom:1px solid rgba(var(--i),.2)"><span style="font-size:12px;color:rgba(var(--i),.6)">!</span><span style="font-size:12.5px;line-height:1.6;color:rgba(var(--i),.86)">Your phone: OPPO. Two settings to check.</span></div>
+</div>
+<div style="border:1px solid rgba(var(--i),.42);border-radius:2px;padding:24px">
+<div style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(var(--i),.6)">Test · Ring me in 10 seconds. Lock your phone.</div>
+<div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-top:18px">
+<span data-cd="" style="font-family:'Fraunces',serif;font-weight:300;font-size:clamp(140px,16vw,230px);line-height:.8;letter-spacing:-.05em;font-variant-numeric:tabular-nums">10</span>
+<span style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(var(--i),.5);padding-bottom:8px">Seconds</span>
+</div>
+<div data-cdres="" style="display:flex;align-items:center;gap:12px;margin-top:22px;padding-top:18px;border-top:1px solid rgba(var(--i),.2);opacity:0"><span style="position:relative;width:14px;height:14px;border:1px solid rgb(var(--i));box-sizing:border-box;flex:none"><span style="position:absolute;inset:2px;background:rgb(var(--i))"></span></span><span style="font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:500">Passed. Sampai can wake this phone.</span></div>
+</div>
+</div>
 </section>
 
-<section class="section">
-  <div class="wrap">
-    <div class="sec-head"><span class="sec-num">02</span><h2 class="split">Five seconds to set.</h2></div>
-    <div class="sec-body">
-      <div>
-        <p class="reveal">Type what it is, tap a time, save. In 30 minutes, in an hour, tonight at 8, tomorrow at 9, or any time you pick. Repeating reminders are there when something comes back every day or every week.</p>
-        <ul class="kv stagger">
-          <li><span>Title</span><span>Keyboard up, ready to type</span></li>
-          <li><span>Time</span><span>One tap on a chip</span></li>
-          <li><span>Nag</span><span>Your default, set once</span></li>
-          <li><span>Save</span><span>Under five seconds</span></li>
-        </ul>
-      </div>
-      <div class="plates">
-        <figure class="plate parallax" data-speed="-60">
-          <div class="frame"><img src="assets/screens/01-home.jpg" width="720" height="1600" alt="The Due screen listing today's and tomorrow's reminders with their times and nag intervals."></div>
-          <figcaption class="label"><span>Plate 02 · Due</span><span>3 active</span></figcaption>
-        </figure>
-        <figure class="plate parallax" data-speed="60">
-          <div class="frame"><img src="assets/screens/02-create.jpg" width="720" height="1600" alt="The new reminder sheet: a title field, time chips, nag interval chips from 1 to 60 minutes, and a Save button."></div>
-          <figcaption class="label"><span>Plate 03 · New</span><span>Nag 10 min</span></figcaption>
-        </figure>
-      </div>
-    </div>
-  </div>
+<section data-gal="" data-sec="04 · Every screen" style="position:relative;height:100vh;overflow:hidden;border-top:1px solid rgba(var(--i),.2);display:flex;flex-direction:column;justify-content:center">
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:0 clamp(20px,4vw,56px) 0 clamp(48px,6vw,96px)">
+<h2 style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(30px,3.6vw,52px);line-height:1;letter-spacing:-.02em">Every screen, filed.</h2>
+<span style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(var(--i),.6);white-space:nowrap">04 · Scroll →</span>
+</div>
+<div data-track="" style="display:flex;gap:40px;padding:36px clamp(20px,4vw,56px) 0 clamp(48px,6vw,96px);width:max-content">
+
+<div style="flex:none;width:252px;display:flex;flex-direction:column;gap:14px">
+<div style="width:252px;height:560px;overflow:hidden;border:1px solid rgba(var(--i),.42);border-radius:2px;position:relative"><img src="assets/screens/07-onboarding.jpg" width="252" height="560" alt="Onboarding screen. Four permissions, each with one plain sentence." style="display:block;width:100%;height:100%;object-fit:cover"></div>
+<div style="display:grid;grid-template-columns:28px minmax(0,1fr);gap:8px"><span style="font-size:10px;letter-spacing:.1em;color:rgba(var(--i),.45)">01</span><div><div style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase">Onboarding</div><div style="font-size:11.5px;line-height:1.55;color:rgba(var(--i),.65);margin-top:5px">Four permissions, each with one plain sentence.</div></div></div>
+</div>
+
+<div style="flex:none;width:252px;display:flex;flex-direction:column;gap:14px">
+<div style="width:252px;height:560px;overflow:hidden;border:1px solid rgba(var(--i),.42);border-radius:2px;position:relative"><img src="assets/screens/08-reliability-passed.jpg" width="252" height="560" alt="Reliability screen. Rings you in 10 seconds to prove it works." style="display:block;width:100%;height:100%;object-fit:cover"></div>
+<div style="display:grid;grid-template-columns:28px minmax(0,1fr);gap:8px"><span style="font-size:10px;letter-spacing:.1em;color:rgba(var(--i),.45)">02</span><div><div style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase">Reliability</div><div style="font-size:11.5px;line-height:1.55;color:rgba(var(--i),.65);margin-top:5px">Rings you in 10 seconds to prove it works.</div></div></div>
+</div>
+
+<div style="flex:none;width:252px;display:flex;flex-direction:column;gap:14px">
+<div style="width:252px;height:560px;overflow:hidden;border:1px solid rgba(var(--i),.42);border-radius:2px;position:relative"><img src="assets/screens/01-home.jpg" width="252" height="560" alt="Home screen. Overdue first. Swipe right for Done, left for Snooze." style="display:block;width:100%;height:100%;object-fit:cover"></div>
+<div style="display:grid;grid-template-columns:28px minmax(0,1fr);gap:8px"><span style="font-size:10px;letter-spacing:.1em;color:rgba(var(--i),.45)">03</span><div><div style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase">Home</div><div style="font-size:11.5px;line-height:1.55;color:rgba(var(--i),.65);margin-top:5px">Overdue first. Swipe right for Done, left for Snooze.</div></div></div>
+</div>
+
+<div style="flex:none;width:252px;display:flex;flex-direction:column;gap:14px">
+<div style="width:252px;height:560px;overflow:hidden;border:1px solid rgba(var(--i),.42);border-radius:2px;position:relative"><img src="assets/screens/03-alert-4.jpg" width="252" height="560" alt="Alert screen. Takes over the lock screen like an alarm clock." style="display:block;width:100%;height:100%;object-fit:cover"></div>
+<div style="display:grid;grid-template-columns:28px minmax(0,1fr);gap:8px"><span style="font-size:10px;letter-spacing:.1em;color:rgba(var(--i),.45)">04</span><div><div style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase">Alert</div><div style="font-size:11.5px;line-height:1.55;color:rgba(var(--i),.65);margin-top:5px">Takes over the lock screen like an alarm clock.</div></div></div>
+</div>
+
+<div style="flex:none;width:252px;display:flex;flex-direction:column;gap:14px">
+<div style="width:252px;height:560px;overflow:hidden;border:1px solid rgba(var(--i),.42);border-radius:2px;position:relative"><img src="assets/screens/05-history.jpg" width="252" height="560" alt="History screen. Done items rest here for 30 days." style="display:block;width:100%;height:100%;object-fit:cover"></div>
+<div style="display:grid;grid-template-columns:28px minmax(0,1fr);gap:8px"><span style="font-size:10px;letter-spacing:.1em;color:rgba(var(--i),.45)">05</span><div><div style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase">History</div><div style="font-size:11.5px;line-height:1.55;color:rgba(var(--i),.65);margin-top:5px">Done items rest here for 30 days.</div></div></div>
+</div>
+
+<div style="flex:none;width:252px;display:flex;flex-direction:column;gap:14px">
+<div style="width:252px;height:560px;overflow:hidden;border:1px solid rgba(var(--i),.42);border-radius:2px;position:relative"><img src="assets/screens/04-widgets.jpg" width="252" height="560" alt="Widgets screen. Next up and Upcoming on the home screen. Pro." style="display:block;width:100%;height:100%;object-fit:cover"></div>
+<div style="display:grid;grid-template-columns:28px minmax(0,1fr);gap:8px"><span style="font-size:10px;letter-spacing:.1em;color:rgba(var(--i),.45)">06</span><div><div style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase">Widgets</div><div style="font-size:11.5px;line-height:1.55;color:rgba(var(--i),.65);margin-top:5px">Next up and Upcoming on the home screen. Pro.</div></div></div>
+</div>
+
+<div style="flex:none;width:252px;display:flex;flex-direction:column;gap:14px">
+<div style="width:252px;height:560px;overflow:hidden;border:1px solid rgba(var(--i),.42);border-radius:2px;position:relative"><img src="assets/screens/06-settings.jpg" width="252" height="560" alt="Settings screen. Export to a plain file. Import it back." style="display:block;width:100%;height:100%;object-fit:cover"></div>
+<div style="display:grid;grid-template-columns:28px minmax(0,1fr);gap:8px"><span style="font-size:10px;letter-spacing:.1em;color:rgba(var(--i),.45)">07</span><div><div style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase">Settings</div><div style="font-size:11.5px;line-height:1.55;color:rgba(var(--i),.65);margin-top:5px">Export to a plain file. Import it back.</div></div></div>
+</div>
+
+</div>
 </section>
 
-<section class="section">
-  <div class="wrap">
-    <div class="sec-head"><span class="sec-num">03</span><h2 class="split">Built for phones that kill apps.</h2></div>
-    <div class="sec-body">
-      <div>
-        <p class="reveal">Many Android phones stop apps in the background to save battery, and reminders quietly go missing. Sampai rings through the system alarm clock, the same path your alarm app uses, and puts itself back after a restart or a time zone change.</p>
-        <p class="reveal">A built-in reliability check shows exactly which permission is missing, takes you to the right setting, and runs a real test ring on your phone.</p>
-      </div>
-      <ul class="kv stagger">
-        <li><span>Rings through</span><span>The system alarm clock</span></li>
-        <li><span>Battery saver</span><span>Still on time</span></li>
-        <li><span>After a restart</span><span>Rescheduled on its own</span></li>
-        <li><span>Locked phone</span><span>Full-screen alert</span></li>
-        <li><span>Time zones</span><span>9 am stays 9 am</span></li>
-        <li><span>Self-test</span><span>A real ring, timed</span></li>
-      </ul>
-    </div>
-  </div>
+<section data-sec="05 · What it does not do" style="position:relative;padding:140px clamp(20px,4vw,56px) 140px clamp(48px,6vw,96px);border-top:1px solid rgba(var(--i),.2)">
+<div data-r="" style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(var(--i),.6)">05 · What it does not do</div>
+<div style="margin-top:36px">
+<div data-no="" style="position:relative;display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:10px 0 14px"><span style="font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(40px,7.4vw,118px);line-height:1;letter-spacing:-.03em">No account.</span><span style="font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(var(--i),.6);text-align:right;max-width:220px">Open it and start</span><span data-noline="" style="position:absolute;left:0;right:0;bottom:0;height:1px;background:rgba(var(--i),.3);transform:scaleX(0);transform-origin:0 50%"></span></div><div data-no="" style="position:relative;display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:10px 0 14px"><span style="font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(40px,7.4vw,118px);line-height:1;letter-spacing:-.03em">No cloud.</span><span style="font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(var(--i),.6);text-align:right;max-width:220px">Stored on this phone</span><span data-noline="" style="position:absolute;left:0;right:0;bottom:0;height:1px;background:rgba(var(--i),.3);transform:scaleX(0);transform-origin:0 50%"></span></div><div data-no="" style="position:relative;display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:10px 0 14px"><span style="font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(40px,7.4vw,118px);line-height:1;letter-spacing:-.03em">No ads.</span><span style="font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(var(--i),.6);text-align:right;max-width:220px">Paid for by Pro, not by you</span><span data-noline="" style="position:absolute;left:0;right:0;bottom:0;height:1px;background:rgba(var(--i),.3);transform:scaleX(0);transform-origin:0 50%"></span></div><div data-no="" style="position:relative;display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:10px 0 14px"><span style="font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(40px,7.4vw,118px);line-height:1;letter-spacing:-.03em">No AI.</span><span style="font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(var(--i),.6);text-align:right;max-width:220px">It rings. That is the job</span><span data-noline="" style="position:absolute;left:0;right:0;bottom:0;height:1px;background:rgba(var(--i),.3);transform:scaleX(0);transform-origin:0 50%"></span></div><div data-no="" style="position:relative;display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:10px 0 14px"><span style="font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(40px,7.4vw,118px);line-height:1;letter-spacing:-.03em">No streaks.</span><span style="font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(var(--i),.6);text-align:right;max-width:220px">Nothing to keep up</span><span data-noline="" style="position:absolute;left:0;right:0;bottom:0;height:1px;background:rgba(var(--i),.3);transform:scaleX(0);transform-origin:0 50%"></span></div><div data-no="" style="position:relative;display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:10px 0 14px"><span style="font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(40px,7.4vw,118px);line-height:1;letter-spacing:-.03em">Nothing leaves the device.</span><span style="font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(var(--i),.6);text-align:right;max-width:220px"></span><span data-noline="" style="position:absolute;left:0;right:0;bottom:0;height:1px;background:rgba(var(--i),.3);transform:scaleX(0);transform-origin:0 50%"></span></div>
+</div>
 </section>
 
-<section class="gallery">
-  <div class="gallery-pin">
-    <div class="wrap">
-      <div class="sec-head"><span class="sec-num">04</span><h2 class="split">On your home screen.</h2></div>
-      <p class="gallery-lead reveal">Five widgets in the same dossier style. They follow your theme and update the moment something changes. Part of Sampai Pro.</p>
-    </div>
-    <div class="gallery-track">
-      <figure class="w-card wide"><img src="assets/screens/widget-next_up.jpg" width="900" height="426" alt="Next up widget: the next reminder with its time in large serif numerals."><figcaption class="label"><span>Next up</span><span>4 × 2</span></figcaption></figure>
-      <figure class="w-card wide"><img src="assets/screens/widget-upcoming.jpg" width="900" height="426" alt="Upcoming widget: the next reminder large and the two after it as rows."><figcaption class="label"><span>Upcoming</span><span>4 × 2</span></figcaption></figure>
-      <figure class="w-card small"><img src="assets/screens/widget-quick_add.jpg" width="900" height="388" alt="Quick add widget with the Sampai wordmark and a plus button."><figcaption class="label"><span>Quick add</span><span>2 × 1</span></figcaption></figure>
-      <figure class="w-card small"><img src="assets/screens/widget-new_reminder.jpg" width="900" height="390" alt="New reminder widget, a solid light block."><figcaption class="label"><span>New reminder</span><span>2 × 1</span></figcaption></figure>
-      <figure class="w-card phone"><img src="assets/screens/04-widgets.jpg" width="720" height="1600" alt="The Upcoming widget on an Android home screen."><figcaption class="label"><span>On the home screen</span><span>Live</span></figcaption></figure>
-    </div>
-  </div>
+<section id="pricing" data-sec="06 · Pricing" style="position:relative;padding:120px clamp(20px,4vw,56px) 120px clamp(48px,6vw,96px);border-top:1px solid rgba(var(--i),.2);overflow:hidden">
+<div data-pwm="" style="position:absolute;right:-3vw;top:40px;font-family:'Fraunces',serif;font-weight:300;font-size:42vw;line-height:.8;color:rgba(var(--i),.045);pointer-events:none;user-select:none">3</div>
+<div data-r="" style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(var(--i),.6);position:relative">06 · Pricing</div>
+<h2 data-r="" style="margin:18px 0 0;font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(36px,5vw,72px);line-height:1.02;letter-spacing:-.02em;max-width:900px;position:relative">Everything that makes a reminder ring stays free.</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:12px;margin-top:48px;position:relative">
+
+<div data-plan="" style="border:1px solid rgba(var(--i),.2);border-radius:2px;padding:24px;background:rgb(var(--p));display:flex;flex-direction:column;gap:18px">
+<div style="display:flex;justify-content:space-between;gap:10px;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase"><span style="color:rgba(var(--i),.6)">Free</span></div>
+<div style="display:flex;align-items:baseline;flex-wrap:wrap;gap:8px;font-variant-numeric:tabular-nums"><span style="font-size:clamp(34px,3.4vw,46px);line-height:1">RM0</span><span style="font-size:12px;color:rgba(var(--i),.6)"></span></div>
+<div style="border-top:1px solid rgba(var(--i),.2)"><div style="display:flex;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid rgba(var(--i),.1);font-size:12px;color:rgba(var(--i),.86)"><span style="width:6px;height:6px;background:rgb(var(--i));flex:none"></span>3 active reminders</div><div style="display:flex;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid rgba(var(--i),.1);font-size:12px;color:rgba(var(--i),.86)"><span style="width:6px;height:6px;background:rgb(var(--i));flex:none"></span>Nag every 1 to 60 min</div><div style="display:flex;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid rgba(var(--i),.1);font-size:12px;color:rgba(var(--i),.86)"><span style="width:6px;height:6px;background:rgb(var(--i));flex:none"></span>Full-screen alerts</div><div style="display:flex;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid rgba(var(--i),.1);font-size:12px;color:rgba(var(--i),.86)"><span style="width:6px;height:6px;background:rgb(var(--i));flex:none"></span>Reliability check</div></div>
+<div style="font-size:11px;line-height:1.55;color:rgba(var(--i),.55);margin-top:auto">Everything that makes a reminder ring.</div>
+</div>
+
+<div data-plan="" style="border:1px solid rgba(var(--i),1);border-radius:2px;padding:24px;background:rgb(var(--p));display:flex;flex-direction:column;gap:18px">
+<div style="display:flex;justify-content:space-between;gap:10px;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase"><span style="color:rgba(var(--i),.6)">Yearly</span><span style="border:1px solid rgba(var(--i),.42);padding:1px 6px;border-radius:2px">Pro</span></div>
+<div style="display:flex;align-items:baseline;flex-wrap:wrap;gap:8px;font-variant-numeric:tabular-nums"><span style="font-size:clamp(34px,3.4vw,46px);line-height:1">RM19.90</span><span style="font-size:12px;color:rgba(var(--i),.6)">/ year</span></div>
+<div style="border-top:1px solid rgba(var(--i),.2)"><div style="display:flex;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid rgba(var(--i),.1);font-size:12px;color:rgba(var(--i),.86)"><span style="width:6px;height:6px;background:rgb(var(--i));flex:none"></span>Unlimited reminders</div><div style="display:flex;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid rgba(var(--i),.1);font-size:12px;color:rgba(var(--i),.86)"><span style="width:6px;height:6px;background:rgb(var(--i));flex:none"></span>Home-screen widgets</div><div style="display:flex;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid rgba(var(--i),.1);font-size:12px;color:rgba(var(--i),.86)"><span style="width:6px;height:6px;background:rgb(var(--i));flex:none"></span>Unlimited history</div></div>
+<div style="font-size:11px;line-height:1.55;color:rgba(var(--i),.55);margin-top:auto">Renews yearly. Cancel in Play any time.</div>
+</div>
+
+<div data-plan="" style="border:1px solid rgba(var(--i),.2);border-radius:2px;padding:24px;background:rgb(var(--p));display:flex;flex-direction:column;gap:18px">
+<div style="display:flex;justify-content:space-between;gap:10px;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase"><span style="color:rgba(var(--i),.6)">Lifetime</span><span style="border:1px solid rgba(var(--i),.42);padding:1px 6px;border-radius:2px">Pro</span></div>
+<div style="display:flex;align-items:baseline;flex-wrap:wrap;gap:8px;font-variant-numeric:tabular-nums"><span style="font-size:clamp(34px,3.4vw,46px);line-height:1">RM49.90</span><span style="font-size:12px;color:rgba(var(--i),.6)">once</span></div>
+<div style="border-top:1px solid rgba(var(--i),.2)"><div style="display:flex;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid rgba(var(--i),.1);font-size:12px;color:rgba(var(--i),.86)"><span style="width:6px;height:6px;background:rgb(var(--i));flex:none"></span>Everything in Pro</div><div style="display:flex;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid rgba(var(--i),.1);font-size:12px;color:rgba(var(--i),.86)"><span style="width:6px;height:6px;background:rgb(var(--i));flex:none"></span>Paid once</div><div style="display:flex;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid rgba(var(--i),.1);font-size:12px;color:rgba(var(--i),.86)"><span style="width:6px;height:6px;background:rgb(var(--i));flex:none"></span>Unlocked forever</div></div>
+<div style="font-size:11px;line-height:1.55;color:rgba(var(--i),.55);margin-top:auto">One purchase, tied to your Play account.</div>
+</div>
+
+</div>
+<div style="margin-top:12px;font-size:11px;line-height:1.6;color:rgba(var(--i),.55);position:relative">Malaysian prices. Google Play shows the price for your country.</div>
+<div data-r="" style="margin-top:12px;border:1px solid rgba(var(--i),.2);border-radius:2px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(20px,3vw,40px);padding:24px;align-items:center;position:relative;background:rgb(var(--p))">
+<canvas data-bell="" width="368" height="476" style="width:clamp(110px,12vw,160px);height:auto;display:block"></canvas>
+<div><div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase">HONOURED FOREVER.</div><p style="margin:10px 0 0;font-size:13px;line-height:1.75;color:rgba(var(--i),.86);max-width:680px;text-wrap:pretty">If this app ever leaves the Play Store or changes hands, your purchase stays unlocked in the last version shipped. Your data exports to a plain file from Settings, today and always. No account. Nothing leaves your phone except the receipt Google Play needs.</p></div>
+</div>
 </section>
 
-<section class="section">
-  <div class="wrap">
-    <div class="sec-head"><span class="sec-num">05</span><h2 class="split">Yours, and only yours.</h2></div>
-    <div class="sec-body">
-      <div>
-        <div class="stat">
-          <div><span class="label">Accounts</span><b class="countdown" data-from="12">0</b></div>
-          <div><span class="label">Ads</span><b class="countdown" data-from="48">0</b></div>
-          <div><span class="label">Trackers</span><b class="countdown" data-from="97">0</b></div>
-        </div>
-        <p class="reveal" style="margin-top:22px">Everything stays on your phone. No sign-up, no cloud, no AI. Export all of it to a plain file whenever you like, and import it on your next phone.</p>
-      </div>
-      <ul class="kv stagger">
-        <li><span>Languages</span><span>English · Bahasa Melayu · Bahasa Indonesia</span></li>
-        <li><span>Themes</span><span>Dark · Paper</span></li>
-        <li><span>Text size</span><span>Follows your phone, up to 2×</span></li>
-        <li><span>Accessibility</span><span>Larger text · Stronger contrast</span></li>
-        <li><span>Works offline</span><span>Always</span></li>
-      </ul>
-    </div>
-  </div>
+<section data-sec="07 · Three languages" style="position:relative;padding:100px 0;border-top:1px solid rgba(var(--i),.2);overflow:hidden">
+<div style="padding:0 clamp(20px,4vw,56px) 0 clamp(48px,6vw,96px);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(var(--i),.6)">07 · English · Bahasa Melayu · Bahasa Indonesia</div>
+<div data-mq="" style="display:flex;width:max-content;margin-top:36px;white-space:nowrap">
+<span style="font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(56px,10vw,160px);line-height:1;letter-spacing:-.03em;padding-right:.5em;color:rgba(var(--i),1)">Until it's done.</span><span style="font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(56px,10vw,160px);line-height:1;letter-spacing:-.03em;padding-right:.5em;color:rgba(var(--i),.4)">Sampai siap.</span><span style="font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(56px,10vw,160px);line-height:1;letter-spacing:-.03em;padding-right:.5em;color:rgba(var(--i),.18)">Sampai selesai.</span><span style="font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(56px,10vw,160px);line-height:1;letter-spacing:-.03em;padding-right:.5em;color:rgba(var(--i),1)">Until it's done.</span><span style="font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(56px,10vw,160px);line-height:1;letter-spacing:-.03em;padding-right:.5em;color:rgba(var(--i),.4)">Sampai siap.</span><span style="font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(56px,10vw,160px);line-height:1;letter-spacing:-.03em;padding-right:.5em;color:rgba(var(--i),.18)">Sampai selesai.</span>
+</div>
 </section>
 
-<section class="section" id="pricing">
-  <div class="wrap">
-    <div class="sec-head"><span class="sec-num">06</span><h2 class="split">Free to use. Pro when you need more.</h2></div>
-    <div class="plans stagger">
-      <div class="plan">
-        <span class="label">Free</span>
-        <h3>Three at a time</h3>
-        <ul>
-          <li>3 active reminders</li>
-          <li>Every nag interval, 1 to 60 minutes</li>
-          <li>Full-screen lock-screen alert</li>
-          <li>Repeating reminders</li>
-          <li>30 days of history</li>
-          <li>Export and import</li>
-        </ul>
-      </div>
-      <div class="plan pro">
-        <span class="label">Sampai Pro · pricing at launch</span>
-        <h3>No limit</h3>
-        <ul>
-          <li>Unlimited active reminders</li>
-          <li>Five home-screen widgets</li>
-          <li>Unlimited history</li>
-          <li>Yearly, or once for life</li>
-        </ul>
-      </div>
-    </div>
-    <div class="promise reveal">
-      <span class="label">Honoured forever</span>
-      <p>If this app ever leaves the Play Store or changes hands, your purchase stays unlocked in the last version shipped. Your data exports to a plain file from Settings, today and always. No account. Nothing leaves your phone except the receipt Google Play needs.</p>
-    </div>
-  </div>
-</section>
-
-<section class="outro">
-  <div class="wrap">
-    <div class="outro-word split-chars" aria-label="Sampai. Until it's done.">Until it's done.</div>
-    <span class="btn ghost">Coming soon to Google Play</span>
-  </div>
-</section>
-
-<footer>
-  <div class="wrap">
-    <span class="label">© 2026 Sampai</span>
-    <nav class="label">
-      <a href="privacy/">Privacy</a>
-      <a href="terms/">Terms</a>
-      <a href="mailto:sampai.app.support@gmail.com">sampai.app.support@gmail.com</a>
-    </nav>
-  </div>
+<footer id="get" data-sec="08 · Get it" style="position:relative;padding:140px clamp(20px,4vw,56px) 40px clamp(48px,6vw,96px);border-top:1px solid rgba(var(--i),.2);overflow:hidden">
+<div data-r="" style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(var(--i),.6)">Coming soon to Google Play</div>
+<h2 style="margin:20px 0 0;font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(56px,11vw,190px);line-height:.92;letter-spacing:-.04em;display:flex;flex-wrap:wrap;gap:0 .22em">
+<span style="display:inline-block;overflow:hidden;padding-bottom:.08em"><span data-fw="" style="display:inline-block">Until</span></span><span style="display:inline-block;overflow:hidden;padding-bottom:.08em"><span data-fw="" style="display:inline-block">it's</span></span><span style="display:inline-block;overflow:hidden;padding-bottom:.08em"><span data-fw="" style="display:inline-block">done.</span></span>
+</h2>
+<div data-r="" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:44px;align-items:center">
+<a href="#get" style="display:inline-flex;align-items:center;gap:14px;height:56px;padding:0 22px;background:rgb(var(--i));color:rgb(var(--p));border-radius:2px;text-decoration:none"><span style="width:10px;height:10px;background:currentColor"></span><span style="display:flex;flex-direction:column;line-height:1.15"><span style="font-size:9px;letter-spacing:.16em">COMING SOON TO</span><span style="font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:500">Google Play</span></span></a>
+<span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(var(--i),.6)">Android · No account · Nothing leaves the device</span>
+</div>
+<div style="margin-top:140px;padding-top:18px;border-top:1px solid rgba(var(--i),.2);display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(var(--i),.55);position:relative;z-index:1">
+<span>© 2026 Sampai</span>
+<div style="display:flex;gap:20px"><a href="privacy/" style="text-decoration:none;color:rgba(var(--i),.7)">Privacy</a><a href="terms/" style="text-decoration:none;color:rgba(var(--i),.7)">Terms</a><a href="mailto:sampai.app.support@gmail.com" style="text-decoration:none;color:rgba(var(--i),.7)">Contact</a></div>
+</div>
+<div data-fwm="" style="position:absolute;left:clamp(30px,5vw,80px);bottom:-5vw;font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:30vw;line-height:.8;letter-spacing:-.04em;color:rgba(var(--i),.045);pointer-events:none;user-select:none;white-space:nowrap">sampai</div>
 </footer>
-
+</div>
 <script src="assets/vendor/lenis.min.js"></script>
 <script src="assets/vendor/gsap.min.js"></script>
 <script src="assets/vendor/ScrollTrigger.min.js"></script>
-<script src="assets/vendor/SplitText.min.js"></script>
-<script src="assets/site.js"></script>
+<script src="assets/landing.js"></script>
 </body>
 </html>
