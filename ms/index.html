@@ -56,7 +56,7 @@
   footer > div[style*="margin-top:140px"] { margin-top: 80px !important; }
 }
 </style>
-<style>@media (hover: none), (pointer: coarse) { [data-hint] { display: none !important; } } [data-vwrap] video:focus-visible { outline: 1px solid rgb(var(--i)); outline-offset: 3px; }</style>
+<style>[data-hint-tap] { display: none; } @media (hover: none), (pointer: coarse) { [data-hint-hover] { display: none; } [data-hint-tap] { display: inline; } } @media (max-width: 720px) { [data-hint] { display: none !important; } } @media (max-width: 1100px) { [data-clip] figcaption { flex-direction: column; gap: 4px !important; } [data-clip] figcaption > span:last-child { text-align: left !important; } } [data-vwrap] video:focus-visible { outline: 1px solid rgb(var(--i)); outline-offset: 3px; }</style>
 </head>
 <body>
 <div data-root="" style="position:relative;font-family:'Space Mono',monospace;color:rgb(var(--i));background:rgb(var(--p))">
@@ -103,7 +103,7 @@
 <section id="film" data-sec="Dalam gerakan" style="position:relative;padding:110px clamp(20px,4vw,56px) 110px clamp(48px,6vw,96px)">
 <div style="display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap">
 <h2 data-r="" style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(36px,5vw,72px);line-height:1.02;letter-spacing:-.02em">Dirakam pada telefon.</h2>
-<span data-hint="" data-r="" style="display:inline-flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(var(--i),.6)"><span style="width:0;height:0;border-left:7px solid rgb(var(--i));border-top:4.5px solid transparent;border-bottom:4.5px solid transparent"></span>Halakan tetikus pada klip untuk memainkannya</span>
+<span data-hint="" data-r="" style="display:inline-flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(var(--i),.6)"><span style="width:0;height:0;border-left:7px solid rgb(var(--i));border-top:4.5px solid transparent;border-bottom:4.5px solid transparent"></span><span data-hint-hover="">Halakan tetikus pada klip untuk memainkannya</span><span data-hint-tap="">Ketik klip untuk memainkannya</span></span>
 </div>
 <div data-clips="" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2.4vw,36px);margin-top:44px">
 <figure data-clip="" style="margin:0;flex:none;display:flex;flex-direction:column;gap:12px">
@@ -335,7 +335,19 @@
     });
     return;
   }
-  // Touch: the swipe row keeps only the clip in view on screen, so play that one.
+  // Wide touch screens (tablets) show all three side by side: tap to play one.
+  if (matchMedia('(min-width: 721px)').matches) {
+    vids.forEach(v => {
+      v.preload = 'metadata';
+      v.addEventListener('click', () => {
+        if (!v.paused) { v.pause(); return; }
+        vids.forEach(o => o !== v && o.pause());
+        v.preload = 'auto'; v.play().catch(() => { v.controls = true; });
+      });
+    });
+    return;
+  }
+  // Phones: the swipe row shows one clip at a time, so play the one in view.
   const io = new IntersectionObserver(es => es.forEach(e => {
     const v = e.target;
     if (e.isIntersecting) { v.preload = 'auto'; v.play().catch(() => { v.controls = true; }); } else v.pause();
